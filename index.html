@@ -121,6 +121,12 @@ summary{cursor:pointer;font-weight:700;color:var(--c)}
 .slide.intercalaire h1{font-size:3.2rem;margin-bottom:.6rem}
 .sous-fam{font-size:1.5rem;font-weight:700;color:var(--c);letter-spacing:.08em;text-transform:uppercase;margin:0 0 1.2rem}
 .approches{font-size:1.05rem;color:var(--texte2)}
+.mosa-boutons{display:flex;flex-wrap:wrap;gap:.5rem;margin:.2rem 0 .4rem}
+.mosa-boutons button{border:2px solid var(--f3);background:#fff;color:var(--f3);border-radius:10px;padding:.45rem .9rem;font-weight:700}
+.mosa-boutons button[aria-pressed="true"]{background:var(--f3);color:#fff}
+svg.mosa{width:100%;height:auto;max-height:46vh}
+svg.mosa .el{transition:transform .9s ease}
+@media (prefers-reduced-motion:reduce){svg.mosa .el{transition:none}}
 @media (max-width:900px){.g3,.g4,.timeline{grid-template-columns:repeat(2,minmax(0,1fr))}.slide{padding:1.3rem 1.2rem}h1{font-size:2rem}h2{font-size:1.45rem}}
 @media (max-width:600px){.g2,.g3,.g4,.timeline{grid-template-columns:1fr}.barre .cours{display:none}.tri{flex-direction:column;align-items:flex-start}}
 @media (prefers-reduced-motion:reduce){.progres{transition:none}}
@@ -595,7 +601,7 @@ summary{cursor:pointer;font-weight:700;color:var(--c)}
 </section>
 
 <section class="slide" data-fam="f3" data-titre="F3 · Juxtaposer, coopérer, collaborer">
-  <p class="surtitre">Famille 3 · Approches sociales et coopératives · 1/7</p>
+  <p class="surtitre">Famille 3 · Approches sociales et coopératives · 1/9</p>
   <h2>Juxtaposer, coopérer, collaborer</h2>
   <p class="grand">L'interaction entre élèves est le moteur de l'apprentissage, pas seulement une façon d'organiser la classe.</p>
   <div class="alerte"><b>Un outil partagé ne rend pas le travail collaboratif.</b> Quand chaque membre d'une équipe rédige « sa » section dans un document en ligne, l'outil est collaboratif, mais la pratique est une juxtaposition : on assemble des parties que personne n'a lues en entier.</div>
@@ -612,7 +618,7 @@ summary{cursor:pointer;font-weight:700;color:var(--c)}
 </section>
 
 <section class="slide" data-fam="f3" data-titre="F3 · Les courants et le triangle">
-  <p class="surtitre">Famille 3 · 2/7</p>
+  <p class="surtitre">Famille 3 · 2/9</p>
   <h2>Sur quoi repose la famille?</h2>
   <div class="grille g3">
     <div class="carte teinte"><h3>Vygotski</h3><p>Zone proximale de développement : avec l'aide d'un pair, l'élève réussit ce qu'il ne réussit pas encore seul. Le langage est un outil de pensée.</p></div>
@@ -627,7 +633,7 @@ summary{cursor:pointer;font-weight:700;color:var(--c)}
 </section>
 
 <section class="slide" data-fam="f3" data-titre="F3 · Quand y faire appel">
-  <p class="surtitre">Famille 3 · 3/7</p>
+  <p class="surtitre">Famille 3 · 3/9</p>
   <h2>Quand y faire appel?</h2>
   <div class="grille g2">
     <div class="carte"><h3>Pertinente quand l'intention demande de…</h3><ul>
@@ -649,7 +655,7 @@ summary{cursor:pointer;font-weight:700;color:var(--c)}
 </section>
 
 <section class="slide" data-fam="f3" data-titre="F3 · Comment la mettre en œuvre">
-  <p class="surtitre">Famille 3 · 4/7</p>
+  <p class="surtitre">Famille 3 · 4/9</p>
   <h2>Comment la mettre en œuvre?</h2>
   <div class="chaine">
     <div class="etape"><span class="num">1</span><h3>Préparer</h3><p>Rendre la tâche commune nécessaire : ressources complémentaires, groupes formés, obstacles de participation anticipés.</p><p><i>« Pourquoi avons-nous besoin des autres? »</i></p></div>
@@ -666,8 +672,43 @@ summary{cursor:pointer;font-weight:700;color:var(--c)}
   <aside class="notes">Quatre moments. Le deuxième est souvent oublié : on attend des élèves qu'ils sachent coopérer sans le leur avoir enseigné. Les rôles en bas sont des rôles cognitifs. Un secrétaire, un décorateur ou un gardien du temps peuvent aider l'organisation, mais ils ne créent pas de coopération intellectuelle. Les rôles peuvent tourner.</aside>
 </section>
 
+<section class="slide" data-fam="f3" data-titre="F3 · Zoom : l'approche mosaïque">
+  <p class="surtitre">Famille 3 · 5/9 · Zoom sur une structure</p>
+  <h2>L'approche mosaïque (casse-tête d'expertise, <i lang="en">jigsaw</i>)</h2>
+  <div class="mosa-boutons" role="group" aria-label="Étapes de l'approche mosaïque">
+    <button type="button" data-etape="0" aria-pressed="true">1. Équipes de base</button>
+    <button type="button" data-etape="1" aria-pressed="false">2. Groupes d'experts</button>
+    <button type="button" data-etape="2" aria-pressed="false">3. Retour et synthèse</button>
+  </div>
+  <svg class="mosa" viewBox="0 0 880 270" role="img" aria-labelledby="mosa-desc"><desc id="mosa-desc">Seize élèves répartis en quatre équipes de base ; chaque membre reçoit un sujet numéroté de 1 à 4. Les élèves qui ont le même sujet se regroupent en groupes d'experts, puis retournent dans leur équipe de base pour partager leur expertise et faire une synthèse.</desc></svg>
+  <div class="fb mosa-texte" aria-live="polite"></div>
+  <aside class="notes">Avancez étape par étape avec les trois boutons, en laissant le groupe prédire ce qui va se passer. Étape 1 : chaque équipe de base reçoit quatre sujets différents, un par membre ; l'exemple compte seize élèves et quatre sujets, mais on adapte selon la classe et les contenus. Étape 2 : les élèves qui ont le même sujet se regroupent pour devenir experts. Étape 3 : chacun retourne dans son équipe de base pour partager son expertise ; la synthèse doit faire ressortir les différentes expertises. C'est là que naissent les négociations et, possiblement, les conflits sociocognitifs, sur les contenus comme sur l'argumentation pour les faire valoir. Faites remarquer que l'interdépendance est inscrite dans la structure : sans l'expert du sujet 3, l'équipe ne peut pas faire la synthèse.</aside>
+</section>
+
+<section class="slide" data-fam="f3" data-titre="F3 · Mosaïque : exemples et conditions">
+  <p class="surtitre">Famille 3 · 6/9</p>
+  <h2>La mosaïque en classe : deux exemples</h2>
+  <div class="grille g2">
+    <div class="carte"><span class="etiq">Science et technologie · 3e ou 4e année</span>
+      <p>Quatre grands biomes : <b>forêt tempérée, désert, toundra, forêt tropicale</b>. Chaque expert étudie un biome, puis l'équipe de base compose une synthèse comparative.</p>
+      <p class="petit"><b>Évaluation individuelle possible :</b> « Imagine que tu es un animal : dans quel biome préférerais-tu vivre, et pourquoi? Décris le climat et deux caractéristiques de cet écosystème. »</p></div>
+    <div class="carte"><span class="etiq">Français · lecture d'un chapitre de roman</span>
+      <ul>
+        <li><b>A · Personnages :</b> actions, sentiments, relations.</li>
+        <li><b>B · Lieux et temps :</b> lieu, moment, ambiance, descriptions.</li>
+        <li><b>C · Problème et solution :</b> obstacle principal (le nœud), façon de le surmonter, résolution.</li>
+        <li><b>D · Vocabulaire et style :</b> trois à cinq mots difficiles, expressions nouvelles, figures de style qui font avancer l'action.</li></ul></div>
+  </div>
+  <div class="grille g3" style="margin-top:.7rem">
+    <div class="carte teinte"><h3>Ce qui la rend coopérative</h3><p>Une synthèse qui <b>oblige à relier</b> les expertises, et pas seulement à les mettre bout à bout.</p></div>
+    <div class="carte teinte"><h3>Le piège</h3><p>Chacun récite « son morceau » : on revient à la juxtaposition.</p></div>
+    <div class="carte teinte"><h3>Pour vérifier</h3><p>Une trace individuelle qui mobilise <b>au moins deux expertises</b>, dont celle d'un autre membre.</p></div>
+  </div>
+  <aside class="notes">Deux exemples à transposer. En science, quatre biomes, un par expert. L'évaluation individuelle proposée est intéressante parce qu'elle demande de justifier un choix ; pour vérifier que l'élève a aussi appris des autres experts, on peut lui demander de comparer son biome préféré avec un autre. En français, les quatre rôles découpent un même chapitre selon des angles de lecture complémentaires ; la synthèse prend tout son sens si l'équipe doit expliquer comment le lieu, le problème et le style éclairent le personnage. Faites le lien avec la diapositive du continuum : la mosaïque est une coopération structurée, à condition que la synthèse oblige à relier. Le niveau proposé pour les biomes est à vérifier dans la Progression des apprentissages en science et technologie.</aside>
+</section>
+
 <section class="slide" data-fam="f3" data-titre="F3 · Conditions et dérives">
-  <p class="surtitre">Famille 3 · 5/7</p>
+  <p class="surtitre">Famille 3 · 7/9</p>
   <h2>Conditions d'efficacité et dérives à surveiller</h2>
   <div class="grille g2">
     <div class="carte"><h3>Six conditions</h3><ol>
@@ -690,7 +731,7 @@ summary{cursor:pointer;font-weight:700;color:var(--c)}
 </section>
 
 <section class="slide" data-fam="f3" data-titre="F3 · Exemples">
-  <p class="surtitre">Famille 3 · 6/7</p>
+  <p class="surtitre">Famille 3 · 8/9</p>
   <h2>Exemples dans les disciplines</h2>
   <div class="grille g3">
     <div class="carte"><span class="etiq">Univers social</span><p>Casse-tête d'expertise : une photo ancienne, un graphique de population, un plan récent. Les experts relient leurs sources pour expliquer comment un quartier a changé.</p></div>
@@ -704,7 +745,7 @@ summary{cursor:pointer;font-weight:700;color:var(--c)}
 </section>
 
 <section class="slide" data-fam="f3" data-titre="F3 · CUA, regards croisés, évaluation">
-  <p class="surtitre">Famille 3 · 7/7</p>
+  <p class="surtitre">Famille 3 · 9/9</p>
   <h2>Accessibilité, regards croisés et évaluation</h2>
   <div class="grille g3">
     <div class="carte teinte"><h3>CUA</h3><ul>
@@ -934,6 +975,46 @@ document.querySelectorAll("[data-aller]").forEach(function(b){
 });
 
 window.addEventListener("hashchange",function(){var h=/^#d(\d+)$/.exec(location.hash);if(h&&parseInt(h[1],10)-1!==i)afficher(parseInt(h[1],10)-1);});
+/* approche mosaïque */
+(function(){
+  var svg=document.querySelector("svg.mosa");if(!svg)return;
+  var NS="http://www.w3.org/2000/svg";
+  var COUL=["#2C5E7A","#7A5420","#5E4385","#2F6A47"];
+  var BX=[20,240,460,680],BW=180,BY=40,BH=196;
+  function el(n,a){var e=document.createElementNS(NS,n);for(var k in a)e.setAttribute(k,a[k]);return e;}
+  var boites=[],titres=[];
+  for(var b=0;b<4;b++){
+    var r=el("rect",{x:BX[b],y:BY,width:BW,height:BH,rx:16,fill:"#fff",stroke:"#C9B3BA","stroke-width":2});svg.appendChild(r);boites.push(r);
+    var t=el("text",{x:BX[b]+BW/2,y:BY-12,"text-anchor":"middle","font-size":17,"font-weight":700,fill:"#8A3A4C"});svg.appendChild(t);titres.push(t);
+  }
+  var synth=el("text",{x:440,y:262,"text-anchor":"middle","font-size":15,fill:"#4C5D53"});svg.appendChild(synth);
+  var eleves=[];
+  for(var e=0;e<4;e++){for(var s=0;s<4;s++){
+    var g=el("g",{"class":"el"});
+    g.appendChild(el("circle",{cx:0,cy:0,r:26,fill:COUL[s],stroke:"#fff","stroke-width":3}));
+    var tx=el("text",{x:0,y:7,"text-anchor":"middle","font-size":20,"font-weight":800,fill:"#fff"});tx.textContent=String(s+1);g.appendChild(tx);
+    var eq=el("text",{x:0,y:42,"text-anchor":"middle","font-size":12,fill:"#4C5D53"});eq.textContent="Équipe "+"ABCD"[e];g.appendChild(eq);
+    svg.appendChild(g);eleves.push({g:g,e:e,s:s});
+  }}
+  function pos(boite,slot){var col=slot%2,lig=Math.floor(slot/2);return [BX[boite]+50+col*80,BY+44+lig*88];}
+  var TXT=[
+    "<b>1. Équipes de base.</b> Chaque équipe reçoit quatre sujets différents : un par membre. Ici, 16 élèves et 4 sujets ; on adapte selon la classe et les contenus.",
+    "<b>2. Groupes d'experts.</b> Les élèves qui ont le même sujet se regroupent. Ensemble, ils approfondissent leur sujet et préparent la façon de l'expliquer.",
+    "<b>3. Retour et synthèse.</b> Chacun revient dans son équipe de base pour partager son expertise et en faire ressortir l'essentiel. La synthèse doit relier les expertises : négociations et conflits sociocognitifs y construisent le savoir."
+  ];
+  var boutons=document.querySelectorAll(".mosa-boutons button"),texte=document.querySelector(".mosa-texte");
+  function etape(n){
+    eleves.forEach(function(x){var p=(n===1)?pos(x.s,x.e):pos(x.e,x.s);x.g.style.transform="translate("+p[0]+"px,"+p[1]+"px)";});
+    titres.forEach(function(t,b){t.textContent=(n===1)?"Experts du sujet "+(b+1):"Équipe de base "+"ABCD"[b];});
+    boites.forEach(function(r){r.setAttribute("stroke",n===2?"#8A3A4C":"#C9B3BA");r.setAttribute("stroke-width",n===2?3:2);});
+    synth.textContent=(n===2)?"Synthèse : relier les quatre expertises pour répondre à la question commune":"";
+    boutons.forEach(function(b,k){b.setAttribute("aria-pressed",String(k===n));});
+    texte.innerHTML='<div class="r info">'+TXT[n]+'</div>';
+  }
+  boutons.forEach(function(b){b.addEventListener("click",function(){etape(parseInt(b.getAttribute("data-etape"),10));});});
+  etape(0);
+})();
+
 var m=/^#d(\d+)$/.exec(location.hash);afficher(m?parseInt(m[1],10)-1:0);
 })();
 </script>
