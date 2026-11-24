@@ -1,0 +1,941 @@
+<!DOCTYPE html>
+<html lang="fr-CA">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Quatre familles d'approches pédagogiques | Présentation 3PDG260</title>
+<meta name="description" content="Présentation interactive des familles d'approches pédagogiques du cours 3PDG260 : courants, choix, mise en œuvre, exemples disciplinaires et interdisciplinaires, CUA et regards croisés.">
+<style>
+:root{
+  --fond:#F6F7F2;--carte:#FFFFFF;--texte:#22302A;--texte2:#4C5D53;--bordure:#D9E0D6;--encre:#2F4F40;
+  --f1:#2C5E7A;--f1p:#E7F0F5;--f2a:#7A5420;--f2ap:#F6EEE2;--f2b:#5E4385;--f2bp:#F0EBF7;--f3:#8A3A4C;--f3p:#F8EAEE;--syn:#2F4F40;--synp:#E9F1EA;
+  --ok:#2F6A47;--nok:#94412F;--taille:18px;
+}
+*{box-sizing:border-box}
+html{font-size:var(--taille)}
+body{margin:0;background:var(--fond);color:var(--texte);font-family:"Atkinson Hyperlegible","Segoe UI",system-ui,-apple-system,Roboto,Arial,sans-serif;line-height:1.5}
+:focus-visible{outline:3px solid #1F6FB2;outline-offset:2px}
+button{font:inherit;cursor:pointer}
+.saut{position:absolute;left:-999px;top:0;background:var(--encre);color:#fff;padding:.5rem 1rem;z-index:99}.saut:focus{left:1rem}
+
+/* barre du haut */
+.barre{position:fixed;top:0;left:0;right:0;height:3.1rem;display:flex;align-items:center;gap:.5rem;padding:0 1rem;background:#fff;border-bottom:1px solid var(--bordure);z-index:20}
+.barre .cours{font-weight:700;font-size:.85rem;color:var(--texte2);margin-right:.4rem;white-space:nowrap}
+.barre .fil{font-size:.85rem;font-weight:700;padding:.15rem .6rem;border-radius:999px;color:#fff;background:var(--encre);white-space:nowrap}
+.barre .espace{flex:1}
+.barre button{font-size:.8rem;padding:.3rem .6rem;border:1px solid var(--bordure);background:#fff;border-radius:7px;color:var(--texte)}
+.barre button[aria-pressed="true"]{background:var(--encre);color:#fff;border-color:var(--encre)}
+.progres{position:fixed;top:3.1rem;left:0;height:4px;background:var(--encre);transition:width .2s;z-index:20}
+
+/* diapositives */
+main{padding:4.2rem 1rem 4.6rem;min-height:100vh}
+.slide{display:none;max-width:1180px;margin:0 auto;background:var(--carte);border-radius:18px;border:1px solid var(--bordure);box-shadow:0 6px 24px rgba(30,50,40,.06);padding:1.8rem 2.2rem 1.6rem;min-height:calc(100vh - 9.4rem);flex-direction:column;position:relative;overflow:hidden}
+.slide.active{display:flex}
+.slide::before{content:"";position:absolute;left:0;top:0;bottom:0;width:8px;background:var(--c,var(--encre))}
+.slide[data-fam="f1"]{--c:var(--f1);--cp:var(--f1p)}
+.slide[data-fam="f2a"]{--c:var(--f2a);--cp:var(--f2ap)}
+.slide[data-fam="f2b"]{--c:var(--f2b);--cp:var(--f2bp)}
+.slide[data-fam="f3"]{--c:var(--f3);--cp:var(--f3p)}
+.slide[data-fam="syn"],.slide[data-fam="intro"]{--c:var(--syn);--cp:var(--synp)}
+.surtitre{font-size:.78rem;font-weight:800;letter-spacing:.1em;text-transform:uppercase;color:var(--c);margin:0 0 .35rem}
+h1{font-size:2.5rem;line-height:1.12;margin:.2rem 0 .8rem;color:var(--c);letter-spacing:-.02em}
+h2{font-size:1.75rem;line-height:1.2;margin:0 0 .9rem;color:var(--c)}
+h3{font-size:1.08rem;margin:.2rem 0 .45rem;color:var(--c)}
+p{margin:.35rem 0 .6rem}
+.lead{font-size:1.18rem;color:var(--texte2);max-width:58rem}
+.grand{font-size:1.25rem;font-weight:700;line-height:1.3;color:var(--texte);max-width:52rem}
+.grille{display:grid;gap:.9rem}
+.g2{grid-template-columns:repeat(2,minmax(0,1fr))}.g3{grid-template-columns:repeat(3,minmax(0,1fr))}.g4{grid-template-columns:repeat(4,minmax(0,1fr))}
+.carte{border:1px solid var(--bordure);border-radius:12px;padding:.85rem 1rem;background:#fff;min-width:0}
+.carte.teinte{background:var(--cp);border-color:transparent}
+.carte h3{margin-top:0}
+.carte ul{margin:.3rem 0 0;padding-left:1.1rem}.carte li{margin:.2rem 0}
+.petit{font-size:.86rem;color:var(--texte2)}
+.etiq{display:inline-block;font-size:.75rem;font-weight:700;padding:.1rem .55rem;border-radius:999px;background:var(--cp);color:var(--c);border:1px solid var(--c);margin:0 .3rem .3rem 0}
+.alerte{border-left:5px solid var(--nok);background:#FBEFEC;padding:.6rem .9rem;border-radius:0 10px 10px 0;margin:.6rem 0}
+.alerte b{color:var(--nok)}
+.bon{border-left:5px solid var(--ok);background:#EDF5EF;padding:.6rem .9rem;border-radius:0 10px 10px 0;margin:.6rem 0}
+.bandeau{background:#FFF7E0;border:1px solid #E8D28C;color:#5B4A10;border-radius:10px;padding:.45rem .8rem;font-size:.88rem;margin:0 0 .7rem}
+table{border-collapse:collapse;width:100%;font-size:.88rem;background:#fff}
+th,td{border:1px solid var(--bordure);padding:.45rem .55rem;text-align:left;vertical-align:top}
+thead th{color:#fff;background:var(--encre)}
+th.f1{background:var(--f1)}th.f2a{background:var(--f2a)}th.f2b{background:var(--f2b)}th.f3{background:var(--f3)}
+tbody th{background:#F3F5F1}
+.defile{overflow-x:auto}
+
+/* chaine d'étapes */
+.chaine{display:flex;gap:.5rem;align-items:stretch;flex-wrap:wrap;margin:.4rem 0 .6rem}
+.etape{flex:1 1 150px;background:var(--cp);border-radius:12px;padding:.7rem .8rem;position:relative;min-width:0}
+.etape .num{display:inline-flex;width:1.7rem;height:1.7rem;border-radius:50%;background:var(--c);color:#fff;font-weight:800;align-items:center;justify-content:center;font-size:.85rem;margin-bottom:.3rem}
+.etape h3{font-size:1rem;margin:.1rem 0 .3rem}
+.etape p{font-size:.86rem;margin:.2rem 0}
+.etape .role{font-size:.8rem;font-weight:700;color:var(--c)}
+.etape.charniere{background:#fff;border:2px dashed var(--c)}
+
+/* triangle */
+.tri{display:flex;gap:.8rem;align-items:center}
+.tri svg{width:190px;height:auto;flex-shrink:0}
+
+/* interactions */
+.choix{display:flex;flex-wrap:wrap;gap:.45rem;margin:.4rem 0}
+.choix button{border:1px solid var(--c);background:#fff;color:var(--c);border-radius:9px;padding:.45rem .75rem;font-size:.9rem;text-align:left}
+.choix button[aria-pressed="true"]{background:var(--c);color:#fff}
+.fb{min-height:1.5rem;margin-top:.4rem}
+.fb .r{padding:.6rem .85rem;border-radius:10px;font-size:.92rem}
+.fb .r.ok{background:#EDF5EF;border:1px solid var(--ok)}
+.fb .r.nok{background:#FBEFEC;border:1px solid var(--nok)}
+.fb .r.info{background:var(--cp);border:1px solid var(--c)}
+details{border:1px solid var(--bordure);border-radius:10px;padding:.5rem .8rem;margin:.5rem 0;background:#fff}
+summary{cursor:pointer;font-weight:700;color:var(--c)}
+
+/* notes */
+.notes{display:none}
+#panneau-notes{position:fixed;right:0;top:3.1rem;bottom:3.4rem;width:min(420px,92vw);background:#FFFDF6;border-left:1px solid var(--bordure);box-shadow:-6px 0 18px rgba(0,0,0,.06);padding:1rem 1.2rem;overflow:auto;z-index:25;font-size:.95rem}
+#panneau-notes[hidden]{display:none}
+#panneau-notes h2{font-size:1rem;color:var(--encre);margin:0 0 .5rem}
+
+/* bas */
+.nav{position:fixed;bottom:0;left:0;right:0;height:3.4rem;display:flex;align-items:center;justify-content:center;gap:.7rem;background:#fff;border-top:1px solid var(--bordure);z-index:20}
+.nav button{border:1px solid var(--encre);background:#fff;color:var(--encre);border-radius:9px;padding:.4rem .9rem;font-weight:700}
+.nav button:disabled{opacity:.4;cursor:default}
+#compteur{font-size:.85rem;color:var(--texte2);min-width:5.5rem;text-align:center}
+
+/* plan */
+#plan{position:fixed;inset:3.1rem 0 3.4rem 0;background:rgba(246,247,242,.98);z-index:30;overflow:auto;padding:1.2rem}
+#plan[hidden]{display:none}
+#plan .cols{max-width:1180px;margin:0 auto;display:grid;grid-template-columns:repeat(auto-fit,minmax(210px,1fr));gap:1rem}
+#plan h2{font-size:1rem;margin:.2rem 0 .4rem}
+#plan ol{margin:0;padding-left:1.3rem}
+#plan button{background:none;border:0;padding:.15rem 0;text-align:left;color:var(--texte);font-size:.9rem;text-decoration:underline;text-underline-offset:2px}
+
+.titre-page{display:flex;flex-direction:column;justify-content:center;flex:1}
+.puces-fam{display:flex;flex-wrap:wrap;gap:.6rem;margin-top:1rem}
+.puces-fam .aller{padding:.55rem 1rem;border-radius:10px;color:#fff;font-weight:700;border:0;font-size:1rem;box-shadow:0 2px 6px rgba(0,0,0,.12)}
+.puces-fam .aller:hover{filter:brightness(1.15);transform:translateY(-1px)}
+.timeline{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:.6rem}
+.timeline .t{border-radius:12px;padding:.7rem .8rem;color:#22302A}
+.timeline .t b{display:block;font-size:.78rem;text-transform:uppercase;letter-spacing:.06em}
+
+.slide.intercalaire{background:var(--cp);text-align:center;align-items:center}
+.slide.intercalaire .titre-page{align-items:center}
+.slide.intercalaire h1{font-size:3.2rem;margin-bottom:.6rem}
+.sous-fam{font-size:1.5rem;font-weight:700;color:var(--c);letter-spacing:.08em;text-transform:uppercase;margin:0 0 1.2rem}
+.approches{font-size:1.05rem;color:var(--texte2)}
+@media (max-width:900px){.g3,.g4,.timeline{grid-template-columns:repeat(2,minmax(0,1fr))}.slide{padding:1.3rem 1.2rem}h1{font-size:2rem}h2{font-size:1.45rem}}
+@media (max-width:600px){.g2,.g3,.g4,.timeline{grid-template-columns:1fr}.barre .cours{display:none}.tri{flex-direction:column;align-items:flex-start}}
+@media (prefers-reduced-motion:reduce){.progres{transition:none}}
+@media print{
+  .barre,.nav,.progres,#panneau-notes,#plan{display:none!important}
+  main{padding:0}
+  .slide{display:flex!important;break-after:page;min-height:auto;box-shadow:none}
+  .notes{display:block;margin-top:.8rem;border-top:1px dashed #aaa;padding-top:.5rem;font-size:.85rem;color:#444}
+  .notes::before{content:"Notes de l'animatrice : ";font-weight:700}
+}
+</style>
+</head>
+<body>
+<a class="saut" href="#diapos">Aller à la présentation</a>
+<div class="barre" role="toolbar" aria-label="Outils de la présentation">
+  <span class="cours">3PDG260 · Approches pédagogiques</span>
+  <span class="fil" id="fil">Introduction</span>
+  <span class="espace"></span>
+  <button type="button" id="b-plan" aria-pressed="false" title="Plan (touche P)">Plan</button>
+  <button type="button" id="b-notes" aria-pressed="false" title="Notes de l'animatrice (touche N)">Notes</button>
+  <button type="button" id="b-moins" aria-label="Réduire le texte">A−</button>
+  <button type="button" id="b-plus" aria-label="Agrandir le texte">A+</button>
+  <button type="button" id="b-imprimer">Imprimer</button>
+</div>
+<div class="progres" id="progres" aria-hidden="true"></div>
+
+<main id="diapos" aria-live="polite">
+
+<!-- ================= INTRODUCTION ================= -->
+<section class="slide" data-fam="intro" data-titre="Titre">
+  <div class="titre-page">
+    <p class="surtitre">3PDG260 · Présentation interactive</p>
+    <h1>Quatre familles d'approches pédagogiques</h1>
+    <p class="lead">Comprendre à quels courants elles se rattachent, savoir quand y faire appel, s'assurer d'une bonne mise en œuvre, et les reconnaître dans toutes les disciplines.</p>
+    <div class="puces-fam">
+      <button type="button" class="aller" data-aller="f1" style="background:var(--f1)">Famille 1 · Structurées et directes</button>
+      <button type="button" class="aller" data-aller="f2a" style="background:var(--f2a)">Famille 2a · Problème et enquête</button>
+      <button type="button" class="aller" data-aller="f2b" style="background:var(--f2b)">Famille 2b · Projet et pédagogies actives</button>
+      <button type="button" class="aller" data-aller="f3" style="background:var(--f3)">Famille 3 · Sociales et coopératives</button>
+    </div>
+    <p class="petit" style="margin-top:1.2rem">Cliquez sur une famille pour y aller directement · Flèches ou barre d'espacement pour avancer · P pour le plan · N pour les notes de l'animatrice</p>
+  </div>
+  <aside class="notes">Bienvenue. Cette présentation suit le même parcours pour chacune des quatre familles, ce qui vous permettra de comparer les familles entre elles plutôt que de mémoriser des listes. Invitez les personnes étudiantes à garder leur grille d'analyse à côté : chaque arrêt correspond à une de ses dimensions.</aside>
+</section>
+
+<section class="slide" data-fam="intro" data-titre="Le même parcours pour chaque famille">
+  <p class="surtitre">Mode d'emploi</p>
+  <h2>Le même parcours pour chaque famille</h2>
+  <div class="grille g3">
+    <div class="carte teinte"><h3>1. L'essentiel et les courants</h3><p>Le geste central de la famille, les théories qui la fondent, la place du triangle de Houssaye.</p></div>
+    <div class="carte teinte"><h3>2. Quand y faire appel</h3><p>Pour quel type d'apprentissage elle est pertinente, et quand elle l'est moins.</p></div>
+    <div class="carte teinte"><h3>3. Comment la mettre en œuvre</h3><p>Les moments clés, ce que fait l'enseignante, ce que pensent les élèves.</p></div>
+    <div class="carte teinte"><h3>4. Conditions et dérives</h3><p>Ce qui garantit l'efficacité, ce qui la fait basculer, avec une question pour vérifier.</p></div>
+    <div class="carte teinte"><h3>5. Exemples</h3><p>Dans plusieurs disciplines du PFEQ, et en interdisciplinarité.</p></div>
+    <div class="carte teinte"><h3>6. Accessibilité, regards croisés, évaluation</h3><p>CUA, perspectives autochtones et traces d'apprentissage alignées.</p></div>
+  </div>
+  <div class="bon" style="margin-top:.9rem">Fil rouge : <b>une approche se juge à ce qu'elle fait apprendre</b>, pas à son nom ni à l'activité visible des élèves.</div>
+  <aside class="notes">Six arrêts, toujours dans le même ordre. Les trois premiers servent à comprendre et à choisir. Les trois derniers servent à vérifier que la mise en œuvre tient ses promesses. Le fil rouge est une question à reprendre tout au long du cours : qu'est-ce que les élèves apprennent réellement?</aside>
+</section>
+
+<section class="slide" data-fam="intro" data-titre="La carte des quatre familles">
+  <p class="surtitre">Vue d'ensemble</p>
+  <h2>La carte des quatre familles</h2>
+  <div class="defile"><table>
+    <thead><tr><th scope="col"></th><th scope="col" class="f1">1 · Structurées et directes</th><th scope="col" class="f2a">2a · Problème et enquête</th><th scope="col" class="f2b">2b · Projet et pédagogies actives</th><th scope="col" class="f3">3 · Sociales et coopératives</th></tr></thead>
+    <tbody>
+      <tr><th scope="row">Geste central</th><td>Rendre visible, puis transférer graduellement la responsabilité</td><td>Faire travailler une question qui résiste</td><td>Rendre des savoirs nécessaires à une réalisation signifiante</td><td>Faire apprendre par et avec les autres</td></tr>
+      <tr><th scope="row">Courants principaux</th><td>Béhaviorisme, cognitivisme (charge cognitive), étayage</td><td>Constructivisme, socioconstructivisme</td><td>Pragmatisme de Dewey, constructivisme, apprentissage expérientiel</td><td>Socioconstructivisme</td></tr>
+      <tr><th scope="row">Ce que fait l'élève</th><td>Observe un expert, pratique avec soutien, puis seul</td><td>Formule des hypothèses, cherche des preuves, justifie</td><td>Décide, produit, reçoit une rétroaction, révise</td><td>Explique, confronte, coordonne, synthétise</td></tr>
+      <tr><th scope="row">Exemples d'approches</th><td>Enseignement explicite, modelage, enseignement direct</td><td>Situation-problème, enquête littéraire, démarche d'investigation</td><td>Approche par projet, pédagogies actives, classe inversée</td><td>Apprentissage coopératif, débat structuré, dialogue, enquête de groupe</td></tr>
+      <tr><th scope="row">Dérive typique</th><td>Une recette sans le pourquoi</td><td>Une fausse enquête</td><td>Un produit sans savoir</td><td>Une équipe sans coopération</td></tr>
+    </tbody>
+  </table></div>
+  <p class="petit">Ce regroupement est la grille de lecture du cours. Il s'inspire en partie de la typologie de Joyce, Weil et Calhoun, sans la reproduire. Les familles se combinent dans une même séquence.</p>
+  <aside class="notes">Voici la carte à garder en tête. Lisez-la par ligne : le geste central d'abord, puis les courants. Remarquez la dernière ligne : chaque famille a sa dérive typique, et c'est souvent elle que vous aurez à repérer dans une situation. Notre regroupement en quatre familles est propre au cours ; il emprunte à Joyce, Weil et Calhoun sans être identique à leur typologie.</aside>
+</section>
+
+<section class="slide" data-fam="intro" data-titre="Partir de l'apprentissage visé">
+  <p class="surtitre">Avant de choisir</p>
+  <h2>Partir de l'apprentissage visé, pas de l'approche</h2>
+  <p class="lead">Qu'est-ce que je veux que mes élèves apprennent? Cliquez sur une visée pour voir quelle famille est la plus indiquée, et pourquoi.</p>
+  <div class="choix" data-groupe="visee">
+    <button type="button" data-fb="Famille 1 d'abord. Une procédure fiable (simplifier une fraction, accorder un participe passé) se découvre difficilement seul. Le modelage avec le pourquoi de chaque étape, puis la pratique guidée, évitent qu'une erreur s'installe.">Exécuter une procédure fiable</button>
+    <button type="button" data-fb="Famille 1, puis réinvestissement. Une stratégie (inférer le sens d'un mot, relire quand on perd le fil) est invisible : il faut la modeler, en montrant QUAND l'utiliser. Elle doit ensuite être mobilisée dans de nouveaux textes, sans qu'on la rappelle.">Utiliser une stratégie au bon moment</button>
+    <button type="button" data-fb="Famille 2a. Une explication se construit en confrontant des hypothèses à des données. Une mini-leçon explicite (famille 1) peut d'abord outiller les élèves pour lire un tableau ou contrôler une variable.">Expliquer un phénomène à partir de données</button>
+    <button type="button" data-fb="Famille 2a, souvent avec la famille 3. Interpréter un texte, une image ou une source exige une question ouverte et des indices à défendre. La discussion entre pairs aide à nuancer et à réviser son interprétation.">Interpréter un texte ou une source</button>
+    <button type="button" data-fb="Famille 2b. Quand plusieurs savoirs doivent être mobilisés ensemble pour un destinataire réel, le projet donne du sens. Il faut toutefois des jalons, des critères et des rétroactions avant la remise.">Mobiliser plusieurs savoirs pour réaliser quelque chose</button>
+    <button type="button" data-fb="Famille 3. Argumenter, tenir compte d'un autre point de vue, construire une compréhension commune exigent l'interaction. Les habiletés de dialogue peuvent elles-mêmes être enseignées explicitement (famille 1).">Confronter des points de vue, argumenter</button>
+  </div>
+  <div class="fb" aria-live="polite"></div>
+  <div class="alerte" style="margin-top:auto"><b>Attention :</b> ces associations sont des points de départ. Le niveau d'expertise des élèves et le moment de la séquence modifient le choix.</div>
+  <aside class="notes">C'est la question qui précède tout choix d'approche. Faites l'exercice avec le groupe : pour chaque visée, demandez d'abord leur intuition, puis cliquez. Insistez sur le fait que les familles se combinent : la famille 1 revient souvent comme mini-leçon au service des autres familles.</aside>
+</section>
+
+<!-- ================= FAMILLE 1 ================= -->
+<section class="slide intercalaire" data-fam="f1" data-titre="Famille 1 · Approches structurées et directes">
+  <div class="titre-page">
+    <h1>Approches structurées et directes</h1>
+    <p class="sous-fam">Famille 1</p>
+    <p class="approches">Enseignement explicite, modelage, enseignement direct</p>
+  </div>
+  <aside class="notes">Cette famille réunit les approches où l'enseignante rend visible ce qui doit être appris, puis se retire graduellement. Demandez au groupe ce que le mot « explicite » évoque pour lui.</aside>
+</section>
+
+<section class="slide" data-fam="f1" data-titre="F1 · L'essentiel et les courants">
+  <p class="surtitre">Famille 1 · Approches structurées et directes · 1/6</p>
+  <h2>Rendre visible ce qui ne l'est pas, puis se retirer graduellement</h2>
+  <p class="grand">L'enseignante rend visibles les connaissances et les processus à apprendre, vérifie la compréhension, puis transfère graduellement la responsabilité à l'élève.</p>
+  <div class="grille g3" style="margin-top:.6rem">
+    <div class="carte teinte"><h3>Béhaviorisme</h3><p>Découpage en petites étapes, pratique répétée, rétroaction immédiate.</p></div>
+    <div class="carte teinte"><h3>Cognitivisme</h3><p>La mémoire de travail est limitée : le modelage et les exemples travaillés réduisent la charge cognitive du novice (Sweller). Types de connaissances : quoi, comment, quand et pourquoi (Tardif).</p></div>
+    <div class="carte teinte"><h3>Étayage</h3><p>Soutien ajusté puis retiré (Wood, Bruner et Ross). Transfert graduel : je fais, nous faisons, tu fais (Pearson et Gallagher).</p></div>
+  </div>
+  <div class="tri" style="margin-top:.8rem">
+    <svg data-tri="f1" viewBox="-30 0 260 175" role="img" aria-label="Triangle de Houssaye : la relation dominante passe d'enseigner à former, puis à apprendre au fil des phases"></svg>
+    <p><b>Houssaye :</b> au modelage, la relation <i>enseigner</i> (enseignante et savoir) domine ; en pratique guidée, <i>former</i> ; en pratique autonome, <i>apprendre</i>. Le triangle doit « tourner ». S'il reste bloqué sur <i>enseigner</i>, les élèves font le mort.</p>
+  </div>
+  <div class="alerte"><b>Ce n'est pas un cours magistral.</b> La clarté de l'exposé ne suffit pas : ce qui caractérise la famille, c'est l'explicitation des raisonnements et la pratique accompagnée.</div>
+  <aside class="notes">L'enseignement explicite emprunte à trois courants. Au béhaviorisme, le découpage et la rétroaction. Au cognitivisme, l'attention à la mémoire de travail : un novice qui cherche seul dépense ses ressources à chercher plutôt qu'à comprendre. Au socioconstructivisme, l'étayage et le transfert graduel. Le triangle de Houssaye est ici une grille de lecture proposée pour le cours : la relation dominante doit se déplacer au fil des phases. Question au groupe, avant de dévoiler les cartes : « Quelle différence faites-vous entre un cours magistral et un enseignement explicite? » Notez les réponses au tableau, puis revenez-y à la fin de la famille.</aside>
+</section>
+
+<section class="slide" data-fam="f1" data-titre="F1 · Quand y faire appel">
+  <p class="surtitre">Famille 1 · 2/6</p>
+  <h2>Quand y faire appel?</h2>
+  <div class="grille g2">
+    <div class="carte"><h3>Pertinente quand…</h3><ul>
+      <li>les élèves sont <b>novices</b> par rapport à l'objet ;</li>
+      <li>l'objet est complexe, hiérarchisé, avec des étapes difficiles à découvrir seul ;</li>
+      <li>l'objet comporte une part <b>invisible</b> (stratégie, raisonnement) ;</li>
+      <li>des conceptions erronées risquent de s'installer ;</li>
+      <li>des élèves sont freinés par l'implicite des attentes.</li></ul></div>
+    <div class="carte"><h3>Moins pertinente quand…</h3><ul>
+      <li>les élèves maîtrisent déjà l'objet : le guidage devient redondant, voire nuisible (effet de renversement lié à l'expertise, Kalyuga et coll.) ;</li>
+      <li>l'intention est de construire une démarche ouverte ;</li>
+      <li>la visée est relationnelle, créative ou identitaire ;</li>
+      <li>l'exploration libre est le but même de la tâche.</li></ul></div>
+  </div>
+  <h3 style="margin-top:.9rem">Ce qu'on modélise change selon l'objet</h3>
+  <div class="grille g3">
+    <div class="carte teinte"><h3>Une procédure</h3><p>Les étapes et le pourquoi de chacune. <span class="petit">Ex. : simplifier une fraction.</span></p></div>
+    <div class="carte teinte"><h3>Une stratégie</h3><p>Le moment où on l'utilise, son déroulement, la vérification de son efficacité. <span class="petit">Ex. : inférer le sens d'un mot.</span></p></div>
+    <div class="carte teinte"><h3>Une façon de raisonner</h3><p>Le passage de l'observation à l'explication : je constate, j'explique, je justifie. <span class="petit">Ex. : justifier par des données.</span></p></div>
+  </div>
+  <aside class="notes">Retenez deux critères : le niveau d'expertise des élèves et la nature de l'objet. Plus les élèves sont novices et plus l'objet est invisible, plus la famille 1 est indiquée. Le tableau du bas est central : on n'enseigne pas une stratégie comme une procédure. Une stratégie transformée en recette perd sa raison d'être, qui est d'être choisie au bon moment.</aside>
+</section>
+
+<section class="slide" data-fam="f1" data-titre="F1 · Comment la mettre en œuvre">
+  <p class="surtitre">Famille 1 · 3/6</p>
+  <h2>Comment la mettre en œuvre?</h2>
+  <div class="chaine">
+    <div class="etape"><span class="num">1</span><h3>Mise en situation</h3><p class="role">Enseignante</p><p>Annonce l'objectif, crée le besoin, active les connaissances.</p><p class="role">Élève</p><p>Sait ce qu'il va apprendre et à quoi ça sert.</p></div>
+    <div class="etape"><span class="num">2</span><h3>Modelage</h3><p class="role">Enseignante</p><p>Pense à voix haute, y compris les hésitations ; montre un contre-exemple.</p><p class="role">Élève</p><p>Observe un expert ; relie chaque étape à sa justification.</p></div>
+    <div class="etape charniere"><span class="num">✓</span><h3>Vérifier la compréhension</h3><p>Questions sur le pourquoi, réponses de tous (ardoises, bâtonnets). On ne transfère qu'après.</p></div>
+    <div class="etape"><span class="num">3</span><h3>Pratique guidée</h3><p class="role">Enseignante</p><p>Fait faire, circule, relance plutôt que répondre.</p><p class="role">Élève</p><p>Exécute avec soutien, s'autorégule avec l'aide-mémoire.</p></div>
+    <div class="etape"><span class="num">4</span><h3>Pratique autonome</h3><p class="role">Enseignante</p><p>Se retire, observe, recueille des traces.</p><p class="role">Élève</p><p>Mobilise seul, dans des contextes variés.</p></div>
+    <div class="etape"><span class="num">5</span><h3>Objectivation</h3><p class="role">Enseignante</p><p>Institutionnalise, fait verbaliser plusieurs élèves.</p><p class="role">Élève</p><p>Nomme ce qu'il a appris et comment.</p></div>
+  </div>
+  <div class="bon">Une relance qui garde l'élève actif : « À quelle étape es-tu? Regarde l'aide-mémoire : qu'as-tu déjà trouvé? »</div>
+  <aside class="notes">Les cinq phases, avec un moment charnière souvent oublié : la vérification de la compréhension avant de passer à la pratique guidée. Pour chaque phase, regardez les deux colonnes : ce que fait l'enseignante et ce qui se passe dans la tête de l'élève. La pratique guidée est celle où l'on se trompe le plus souvent : on y refait le modelage au lieu de faire faire.</aside>
+</section>
+
+<section class="slide" data-fam="f1" data-titre="F1 · Conditions et dérives">
+  <p class="surtitre">Famille 1 · 4/6</p>
+  <h2>Conditions d'efficacité et dérives à surveiller</h2>
+  <div class="grille g2">
+    <div class="carte"><h3>Conditions</h3><ul>
+      <li>L'objet est nommé et le besoin est créé.</li>
+      <li>Le modelage montre le <b>pourquoi</b>, pas seulement le comment.</li>
+      <li>La compréhension de <b>tous</b> est vérifiée avant le transfert.</li>
+      <li>La pratique guidée va jusqu'au bout de la démarche, avec les élèves aux commandes.</li>
+      <li>La pratique autonome exige une activité intellectuelle autonome.</li>
+      <li>Les critères de réussite reprennent les opérations modélisées.</li></ul></div>
+    <div class="carte"><h3>Dérives</h3><ul>
+      <li>La pratique guidée devient un deuxième modelage.</li>
+      <li>La pratique « autonome » reste encadrée par des questions inductrices.</li>
+      <li>Une démarche enseignée comme une recette à cocher.</li>
+      <li>Seuls quelques élèves répondent aux questions.</li>
+      <li>Les liens à établir sont fournis tout faits, l'élève les recopie.</li></ul></div>
+  </div>
+  <details><summary>Pour vérifier : une moyenne de 9 sur 10 à un questionnaire à choix multiples prouve-t-elle que les élèves savent expliquer?</summary><p>Non. Le questionnaire renseigne sur la reconnaissance de faits ou de vocabulaire. Pour conclure à la capacité d'expliquer, il faut une trace où l'élève construit lui-même son explication, avec les critères annoncés. Une bonne réponse est une trace utile, pas une preuve de maîtrise.</p></details>
+  <aside class="notes">Les dérives de la colonne de droite sont fréquentes, en classe comme en stage. La plus fréquente : répondre à la place des élèves en pratique guidée. La question à déplier est un réflexe à développer pour l'analyse de pratiques comme pour la classe : un élève peut-il obtenir les points sans avoir compris? Activité : en dyades, demandez de décrire une pratique guidée qui devient un deuxième modelage, puis de proposer deux relances qui redonnent la tâche aux élèves.</aside>
+</section>
+
+<section class="slide" data-fam="f1" data-titre="F1 · Exemples">
+  <p class="surtitre">Famille 1 · 5/6</p>
+  <h2>Exemples dans les disciplines</h2>
+  <div class="grille g3">
+    <div class="carte"><span class="etiq">Mathématique</span><p>Simplifier une fraction à partir de la population de villes de la région : modelage avec le pourquoi de la division des deux termes.</p></div>
+    <div class="carte"><span class="etiq">Français</span><p>Inférer le sens d'un mot inconnu à partir des indices du texte, et savoir quand consulter un lexique fiable, notamment pour des mots en inuktitut.</p></div>
+    <div class="carte"><span class="etiq">Science et technologie</span><p>Justifier une explication de la fonte de glaçons à l'aide d'observations : « je constate, j'explique, je justifie ».</p></div>
+    <div class="carte"><span class="etiq">Univers social</span><p>Lire une ligne du temps ou une carte : modeler comment repérer la légende, l'échelle et ce qu'on peut en conclure.</p></div>
+    <div class="carte"><span class="etiq">Éducation physique</span><p>Une technique de passe : démonstration commentée, pratique guidée en dyades, puis situation de jeu.</p></div>
+    <div class="carte teinte"><span class="etiq">Interdisciplinaire</span><p>Au cœur d'un projet de recherche (univers social et français), une <b>mini-leçon explicite</b> sur la prise de notes, au moment où les élèves en ont besoin.</p></div>
+  </div>
+  <aside class="notes">Les trois premiers exemples illustrent les trois objets possibles : une procédure, une stratégie et une façon de raisonner. Remarquez le dernier : la famille 1 se glisse souvent dans les autres familles, sous forme de mini-leçon. C'est une combinaison très efficace, à condition que la mini-leçon arrive quand les élèves en ont besoin.</aside>
+</section>
+
+<section class="slide" data-fam="f1" data-titre="F1 · CUA, regards croisés, évaluation">
+  <p class="surtitre">Famille 1 · 6/6</p>
+  <h2>Accessibilité, regards croisés et évaluation</h2>
+  <div class="grille g3">
+    <div class="carte teinte"><h3>CUA</h3><ul>
+      <li>Objectif affiché tout au long de la leçon.</li>
+      <li>Modelage multimodal : oral, écrit, visuel, manipulation.</li>
+      <li>Aide-mémoire illustré, lu à voix haute.</li>
+      <li>Montrer sa compréhension en disant, écrivant, dessinant, avec les mêmes critères.</li></ul>
+      <p class="petit">Le risque : n'offrir qu'un seul mode de représentation ou d'expression.</p></div>
+    <div class="carte teinte"><h3>Regards croisés</h3><ul>
+      <li><b>Rupture :</b> le béhaviorisme coercitif imposé dans les pensionnats a brisé des pédagogies fondées sur l'observation, le modelage et la relation (Bousquet et Karl, 2019).</li>
+      <li><b>Convergence :</b> apprendre en observant un modèle est au cœur de plusieurs pédagogies autochtones.</li>
+      <li><b>Tension :</b> une observation prolongée et silencieuse, contre un modelage bref et très verbalisé.</li></ul></div>
+    <div class="carte teinte"><h3>Évaluer</h3><ul>
+      <li>Évaluation formative tissée dans chaque phase.</li>
+      <li>Critères alignés sur les opérations modélisées.</li>
+      <li>Distinguer critère, manifestation observable et trace.</li>
+      <li>Une trace individuelle où l'élève mobilise seul.</li></ul></div>
+  </div>
+  <aside class="notes">Trois regards complémentaires. La CUA rappelle que la structure aide beaucoup d'élèves, mais qu'un seul format crée de nouveaux obstacles. Le regard croisé est double : une rupture historique à nommer, et une convergence réelle avec des pédagogies d'observation, qui invite à prévoir du temps pour observer et refaire sans tout verbaliser. Enfin, l'évaluation : elle doit vérifier les opérations modélisées, pas seulement la bonne réponse.</aside>
+</section>
+
+<!-- ================= FAMILLE 2a ================= -->
+<section class="slide intercalaire" data-fam="f2a" data-titre="Famille 2a · Résolution de problèmes et enquête">
+  <div class="titre-page">
+    <h1>Résolution de problèmes et enquête</h1>
+    <p class="sous-fam">Famille 2a</p>
+    <p class="approches">Situation-problème, enquête littéraire, démarche d'investigation</p>
+  </div>
+  <aside class="notes">Cette famille réunit les approches qui partent d'une question qui résiste. Demandez au groupe de nommer une question qui, à l'école, les a vraiment fait chercher.</aside>
+</section>
+
+<section class="slide" data-fam="f2a" data-titre="F2a · L'essentiel et les courants">
+  <p class="surtitre">Famille 2a · Résolution de problèmes et enquête · 1/6</p>
+  <h2>Une question qui résiste</h2>
+  <p class="grand">Le savoir se construit en travaillant sur une question que les élèves ne peuvent pas résoudre avec ce qu'ils savent déjà. Le savoir visé est l'outil qui permet de franchir l'obstacle.</p>
+  <div class="chaine">
+    <div class="etape"><h3>Une question qui résiste</h3></div>
+    <div class="etape"><h3>Des hypothèses ou des stratégies</h3></div>
+    <div class="etape"><h3>Des preuves à examiner</h3></div>
+    <div class="etape"><h3>Une justification révisable</h3></div>
+  </div>
+  <div class="grille g3">
+    <div class="carte teinte"><h3>Constructivisme</h3><p>L'élève réorganise ses connaissances quand elles ne suffisent plus. La notion d'<b>obstacle</b> est centrale (Astolfi).</p></div>
+    <div class="carte teinte"><h3>Socioconstructivisme</h3><p>La confrontation des solutions et des interprétations fait progresser la compréhension.</p></div>
+    <div class="carte teinte"><h3>Institutionnalisation</h3><p>Le moment où l'enseignante formalise le savoir transforme une découverte locale en connaissance transférable (Brousseau).</p></div>
+  </div>
+  <div class="tri" style="margin-top:.6rem">
+    <svg data-tri="f2a" viewBox="-30 0 260 175" role="img" aria-label="Triangle de Houssaye : la relation apprendre, entre élèves et savoir, est mise en avant"></svg>
+    <p><b>Houssaye :</b> la relation <i>apprendre</i> (élèves et savoir) est mise en avant. Risque : que l'enseignante fasse le mort, sans relancer ni institutionnaliser. Les trois pôles restent présents selon les moments.</p>
+  </div>
+  <aside class="notes">La famille 2a part d'une question, pas d'une notion. Ce qui la définit, c'est l'incertitude intellectuelle réelle pour les élèves : une solution à construire, une interprétation à défendre, une explication à vérifier. Insistez sur l'institutionnalisation : sans elle, chaque élève repart avec sa solution, parfois fausse. Question au groupe : « Quelle différence entre une situation-problème et un exercice difficile? » Attendu : l'exercice applique un savoir déjà enseigné, la situation-problème oblige à en construire un.</aside>
+</section>
+
+<section class="slide" data-fam="f2a" data-titre="F2a · Quand y faire appel">
+  <p class="surtitre">Famille 2a · 2/6</p>
+  <h2>Quand y faire appel?</h2>
+  <div class="grille g2">
+    <div class="carte"><h3>Pertinente quand l'intention vise à…</h3><ul>
+      <li>expliquer un phénomène par ses causes ;</li>
+      <li>interpréter un texte, une image, une source ;</li>
+      <li>choisir et justifier une stratégie de résolution ;</li>
+      <li>construire un concept plutôt que le recevoir.</li></ul></div>
+    <div class="carte"><h3>Moins pertinente, ou à combiner, quand…</h3><ul>
+      <li>il s'agit d'automatiser une procédure ou d'installer un vocabulaire de base ;</li>
+      <li>les élèves n'ont pas les préalables : la découverte peu guidée surcharge le novice (Kirschner, Sweller et Clark, 2006).</li></ul>
+      <p class="petit">Réponse de Hmelo-Silver, Duncan et Chinn (2007) : une enquête bien conçue est fortement étayée. Le débat porte sur le guidage, pas sur l'approche.</p></div>
+  </div>
+  <h3 style="margin-top:.8rem">Trois démarches, trois types de preuves</h3>
+  <div class="defile"><table>
+    <thead><tr><th scope="col"></th><th scope="col">Résolution de problème</th><th scope="col">Enquête littéraire</th><th scope="col">Investigation scientifique</th></tr></thead>
+    <tbody>
+      <tr><th scope="row">Ce qui résiste</th><td>Des contraintes à articuler</td><td>Un sens à construire</td><td>Une explication à éprouver</td></tr>
+      <tr><th scope="row">Ce que les élèves décident</th><td>Représentations, stratégies</td><td>Hypothèses de lecture, indices</td><td>Variables, comparaisons, données</td></tr>
+      <tr><th scope="row">Ce qui prouve</th><td>Calculs, contraintes vérifiées</td><td>Passages du texte, cohérence</td><td>Mesures, conditions d'essai</td></tr>
+    </tbody>
+  </table></div>
+  <aside class="notes">La famille 2a est indiquée quand l'apprentissage visé est de l'ordre de l'explication, de l'interprétation ou de la justification. Le débat Kirschner et Hmelo-Silver est important : il ne s'agit pas d'opposer l'enseignement explicite et l'enquête, mais de rappeler que l'enquête doit être étayée. Le tableau montre que la famille se décline différemment selon la discipline, avec des preuves de nature différente.</aside>
+</section>
+
+<section class="slide" data-fam="f2a" data-titre="F2a · Comment la mettre en œuvre">
+  <p class="surtitre">Famille 2a · 3/6</p>
+  <h2>Comment la mettre en œuvre?</h2>
+  <div class="chaine">
+    <div class="etape"><span class="num">1</span><h3>Problématiser</h3><p class="role">Enseignante</p><p>Présente une situation accessible mais ouverte ; fait émerger les idées sans confirmer trop vite.</p><p class="role">Élèves</p><p>Formulent une hypothèse ou une piste.</p><p><i>« Qu'est-ce qui nous manque pour décider? »</i></p></div>
+    <div class="etape"><span class="num">2</span><h3>Explorer</h3><p class="role">Enseignante</p><p>Fournit outils et ressources, questionne les choix, étaye sans donner la méthode.</p><p class="role">Élèves</p><p>Construisent une stratégie, recueillent des preuves.</p><p><i>« Qu'est-ce qui soutient ta piste? »</i></p></div>
+    <div class="etape"><span class="num">3</span><h3>Confronter</h3><p class="role">Enseignante</p><p>Organise la comparaison des pistes ou des résultats.</p><p class="role">Élèves</p><p>Expliquent, réfutent, révisent.</p><p><i>« Quelle preuve ferait changer votre avis? »</i></p></div>
+    <div class="etape"><span class="num">4</span><h3>Structurer</h3><p class="role">Enseignante</p><p>Institutionnalise, distingue conclusion valide et réponse fragile, propose un transfert.</p><p class="role">Élèves</p><p>Formulent ce qu'ils ont appris sur le savoir et sur la démarche.</p></div>
+  </div>
+  <div class="bon">L'enseignante ne disparaît pas : une explication explicite d'un outil peut soutenir l'enquête, à condition de redonner ensuite aux élèves la décision intellectuelle centrale.</div>
+  <aside class="notes">Quatre moments souples, valables pour les trois démarches. Lisez les relances en italique : elles nourrissent le raisonnement sans le remplacer. Le quatrième moment est celui qu'on saute le plus souvent faute de temps, et c'est pourtant lui qui fixe l'apprentissage.</aside>
+</section>
+
+<section class="slide" data-fam="f2a" data-titre="F2a · Conditions et dérives">
+  <p class="surtitre">Famille 2a · 4/6</p>
+  <h2>Conditions d'efficacité et dérives à surveiller</h2>
+  <div class="grille g2">
+    <div class="carte"><h3>Conditions</h3><ul>
+      <li>Un obstacle lié au savoir visé, pas une simple difficulté de lecture ou de calcul.</li>
+      <li>Des préalables suffisants, activés au départ.</li>
+      <li>Un guidage ajusté : relances, outils de démarche, étayage retiré progressivement.</li>
+      <li>Une mise en commun où les solutions se confrontent.</li>
+      <li>Une institutionnalisation explicite.</li></ul></div>
+    <div class="carte"><h3>Dérives</h3><ul>
+      <li><b>La fausse enquête :</b> question, procédure et conclusion données d'avance.</li>
+      <li><b>L'exercice déguisé :</b> les calculs et leur ordre sont fournis.</li>
+      <li>L'enseignante tranche l'interprétation à la place des élèves.</li>
+      <li>Plusieurs variables changent à la fois : on ne peut rien conclure.</li>
+      <li>L'erreur d'un élève, qui aurait pu lancer l'enquête, est écartée.</li></ul></div>
+  </div>
+  <div class="alerte"><b>Le point de bascule :</b> le guidage devient trop directif quand il fait à la place des élèves la décision intellectuelle qu'on voulait leur apprendre.</div>
+  <details><summary>Pour vérifier : les élèves suivent un protocole fourni et retrouvent la conclusion annoncée. Est-ce une investigation?</summary><p>Pas vraiment. Personne n'a posé la question, conçu la comparaison ou interprété des données inattendues. C'est une manipulation dirigée. Demandez-vous toujours : qui pose la question, qui décide de la démarche, et le résultat est-il réellement inconnu des élèves?</p></details>
+  <aside class="notes">La fausse enquête est la dérive typique de la famille 2a. Elle est séduisante parce que les élèves sont actifs et que tout fonctionne. Mais l'apprentissage visé, raisonner sur des preuves, n'a pas lieu. Le point de bascule résume l'enjeu : guider sans décider à leur place. Activité : demandez à chaque dyade de transformer une fausse enquête (par exemple une expérience dont la conclusion est donnée d'avance) en vraie question à investiguer.</aside>
+</section>
+
+<section class="slide" data-fam="f2a" data-titre="F2a · Exemples">
+  <p class="surtitre">Famille 2a · 5/6</p>
+  <h2>Exemples dans les disciplines</h2>
+  <div class="grille g3">
+    <div class="carte"><span class="etiq">Mathématique</span><p>Organiser un trajet qui respecte des contraintes de temps et de distance : plusieurs solutions possibles, à justifier et à comparer.</p></div>
+    <div class="carte"><span class="etiq">Français</span><p>Enquête littéraire : « Peut-on faire confiance à ce personnage? » à partir de deux versions d'un conte, avec des indices choisis par les élèves.</p></div>
+    <div class="carte"><span class="etiq">Science et technologie</span><p>« L'eau traverse-t-elle tous les sols à la même vitesse? » Les élèves décident quoi garder identique pour comparer.</p></div>
+    <div class="carte"><span class="etiq">Univers social</span><p>Enquête sur une photographie ancienne de l'école : que peut-on affirmer avec certitude, que peut-on seulement supposer?</p></div>
+    <div class="carte"><span class="etiq">Culture et citoyenneté québécoise</span><p>D'où vient une règle de vie de l'école, et à qui sert-elle? Recueillir des points de vue avant de conclure.</p></div>
+    <div class="carte teinte"><span class="etiq">Interdisciplinaire</span><p>Science et technologie, mathématique : « Quel contenant garde la collation froide le plus longtemps? » Mesures, tableau, diagramme, explication justifiée.</p></div>
+  </div>
+  <aside class="notes">Les trois premiers exemples correspondent aux trois démarches de la famille. Remarquez que l'univers social et la culture et citoyenneté québécoise se prêtent aussi à l'enquête : distinguer ce qu'une source permet d'affirmer de ce qu'elle laisse supposer est un raisonnement historique. L'exemple interdisciplinaire mobilise la mesure et la représentation de données au service d'une explication scientifique.</aside>
+</section>
+
+<section class="slide" data-fam="f2a" data-titre="F2a · CUA, regards croisés, évaluation">
+  <p class="surtitre">Famille 2a · 6/6</p>
+  <h2>Accessibilité, regards croisés et évaluation</h2>
+  <div class="grille g3">
+    <div class="carte teinte"><h3>CUA : retirer l'obstacle, pas le raisonnement</h3><ul>
+      <li>Problème lu à voix haute, schéma des contraintes.</li>
+      <li>Texte audio, passages numérotés.</li>
+      <li>Tableau de consignation prêt à remplir.</li>
+      <li>Explication à l'écrit, à l'oral ou en schéma, avec les mêmes critères.</li></ul>
+      <p class="petit">Une fiche qui fournit les calculs décisifs ou la conclusion retire le travail à évaluer.</p></div>
+    <div class="carte teinte"><h3>Regards croisés</h3><ul>
+      <li><b>Convergence :</b> apprentissage expérientiel situé et territorial, pédagogie du lieu (Campeau, 2021) : apprendre par l'expérience concrète et l'observation.</li>
+      <li><b>Tension :</b> le savoir territorial est indissociable du lieu, du moment et des relations ; l'enquête scolaire vise une conclusion généralisable.</li>
+      <li><b>Enrichissement :</b> une enquête sur le territoire proche, à plusieurs saisons, avec une personne de la communauté ; des savoirs locaux traités comme des données légitimes (Etuaptmumk).</li></ul></div>
+    <div class="carte teinte"><h3>Évaluer</h3><ul>
+      <li>Évaluer la démarche et l'explication, pas seulement la bonne réponse.</li>
+      <li>Trace forte : solution représentée et justifiée, interprétation appuyée sur des indices, conclusion reliée aux données.</li>
+      <li>Trace insuffisante seule : réponse numérique, relevé de différences, protocole recopié.</li></ul></div>
+  </div>
+  <aside class="notes">La règle d'or de la CUA dans cette famille : on soutient l'accès et l'organisation, sans résoudre la question à la place des élèves. Le regard croisé avec l'apprentissage territorial est riche : il converge avec l'enquête, mais il nous rappelle qu'un savoir lié à un lieu ne se transfère pas comme une règle générale. Enfin, l'évaluation doit capter le raisonnement : une bonne réponse sans justification ne dit rien de la démarche.</aside>
+</section>
+
+<!-- ================= FAMILLE 2b ================= -->
+<section class="slide intercalaire" data-fam="f2b" data-titre="Famille 2b · Projet et pédagogies actives">
+  <div class="titre-page">
+    <h1>Projet et pédagogies actives</h1>
+    <p class="sous-fam">Famille 2b</p>
+    <p class="approches">Approche par projet, pédagogies actives, classe inversée</p>
+  </div>
+  <aside class="notes">Cette famille réunit les approches qui organisent l'apprentissage autour d'une réalisation ou d'une action signifiante. Annoncez la question qui guidera toute la famille : faire quelque chose suffit-il pour apprendre?</aside>
+</section>
+
+<section class="slide" data-fam="f2b" data-titre="F2b · L'essentiel et les courants">
+  <p class="surtitre">Famille 2b · Projet et pédagogies actives · 1/6</p>
+    <h2>Faire, choisir, ajuster, comprendre</h2>
+  <p class="grand">Une réalisation signifiante rend des savoirs nécessaires. Les élèves produisent, mais surtout ils mobilisent des connaissances, décident, reçoivent une rétroaction et révisent.</p>
+  <div class="grille g3" style="margin-top:.5rem">
+    <div class="carte teinte"><h3>Approche par projet</h3><p><b>Une démarche :</b> un défi et une production pour un destinataire réel.</p></div>
+    <div class="carte teinte"><h3>Pédagogies actives</h3><p><b>Un ensemble de pratiques :</b> prédire, tester, classer, argumenter (Freinet, Montessori, ludification).</p></div>
+    <div class="carte teinte"><h3>Classe inversée</h3><p><b>Une organisation :</b> la ressource avant, le travail intellectuel accompagné en classe.</p></div>
+  </div>
+  <div class="grille g2" style="margin-top:.6rem">
+    <div class="carte"><h3>Courants</h3><p><b>Dewey :</b> l'expérience devient éducative quand elle ouvre une enquête et fait l'objet d'une réflexion. <b>Kilpatrick :</b> l'activité intentionnelle. <b>Freinet :</b> tâtonnement, expression, coopération. Constructivisme et apprentissage expérientiel.</p></div>
+    <div class="carte"><h3>Houssaye</h3><p>Quand les élèves choisissent et révisent, <i>apprendre</i> domine ; quand l'enseignante clarifie contenus et critères, <i>enseigner</i>. Risque : le <b>savoir</b> fait le mort, la production prend toute la place.</p></div>
+  </div>
+  <aside class="notes">Trois notions à ne pas confondre : le projet est une démarche, les pédagogies actives un ensemble de pratiques, la classe inversée une organisation du temps. Retenez le risque propre à la famille : une production réussie peut masquer l'absence d'apprentissage. Question au groupe : « Pensez à un projet vécu à l'école. Qu'avez-vous appris, au-delà du produit réalisé? » Les réponses montrent souvent que le produit a pris toute la place.</aside>
+</section>
+
+<section class="slide" data-fam="f2b" data-titre="F2b · Quand y faire appel">
+  <p class="surtitre">Famille 2b · 2/6</p>
+  <h2>Quand y faire appel?</h2>
+  <div class="grille g2">
+    <div class="carte"><h3>Pertinente quand…</h3><ul>
+      <li>plusieurs savoirs, souvent de plusieurs disciplines, doivent être mobilisés ensemble ;</li>
+      <li>un destinataire ou un usage réel donne du sens à la tâche ;</li>
+      <li>on vise le transfert et l'intégration plutôt que la première rencontre d'une notion ;</li>
+      <li>il y a du temps pour des rétroactions avant la remise.</li></ul></div>
+    <div class="carte"><h3>Moins pertinente quand…</h3><ul>
+      <li>le produit est choisi avant l'apprentissage, qu'on cherche ensuite à lui faire illustrer ;</li>
+      <li>les élèves n'ont pas les préalables et aucune mini-leçon n'est prévue ;</li>
+      <li>il n'y aura ni jalon ni révision possible.</li></ul>
+      <p class="petit">Un projet court, en une ou deux périodes, peut suffire : la durée ne fait pas la qualité.</p></div>
+  </div>
+  <h3 style="margin-top:.8rem">Cinq décisions de conception</h3>
+  <div class="chaine">
+    <div class="etape"><span class="num">1</span><p>Définir les apprentissages visés</p></div>
+    <div class="etape"><span class="num">2</span><p>Choisir un défi et un destinataire</p></div>
+    <div class="etape"><span class="num">3</span><p>Préciser ce que les élèves décident</p></div>
+    <div class="etape"><span class="num">4</span><p>Prévoir jalons, ressources, rétroactions</p></div>
+    <div class="etape"><span class="num">5</span><p>Anticiper les traces individuelles</p></div>
+  </div>
+  <aside class="notes">La question de départ n'est pas : quel produit attrayant pourrait-on fabriquer? C'est : quels apprentissages cette réalisation rendra-t-elle nécessaires? Les cinq décisions de conception sont dans l'ordre : on commence toujours par les apprentissages, on finit par les traces.</aside>
+</section>
+
+<section class="slide" data-fam="f2b" data-titre="F2b · Comment la mettre en œuvre">
+  <p class="surtitre">Famille 2b · 3/6</p>
+  <h2>Comment la mettre en œuvre?</h2>
+  <div class="chaine">
+    <div class="etape"><span class="num">1</span><h3>Lancer</h3><p class="role">Enseignante</p><p>Présente la finalité, les objectifs et les critères ; fait émerger les conceptions.</p><p><i>« À quoi servira notre production, et que faudra-t-il comprendre? »</i></p></div>
+    <div class="etape"><span class="num">2</span><h3>Planifier</h3><p class="role">Enseignante</p><p>Propose jalons et outils de suivi, fournit les ressources.</p><p class="role">Élèves</p><p>Choisissent questions, méthodes, ressources.</p></div>
+    <div class="etape"><span class="num">3</span><h3>Produire et ajuster</h3><p class="role">Enseignante</p><p>Observe, enseigne au besoin, rétroagit quand une révision est encore possible.</p><p class="role">Élèves</p><p>Testent, comparent aux critères, modifient.</p></div>
+    <div class="etape"><span class="num">4</span><h3>Présenter et objectiver</h3><p class="role">Enseignante</p><p>Fait expliciter les raisons des choix.</p><p class="role">Élèves</p><p>Expliquent les changements entre les versions.</p><p><i>« Quelle décision montre le mieux ce que vous avez appris? »</i></p></div>
+  </div>
+  <div class="alerte"><b>Autonomie ne veut pas dire abandon :</b> une tâche ouverte demande un cadre d'autant plus lisible (objectifs, critères, temps, ressources, moments de régulation).</div>
+  <aside class="notes">Quatre moments, avec un retour possible sur une étape. Le troisième est décisif : la rétroaction doit arriver pendant la production, quand les élèves peuvent encore réviser. Une rétroaction après la remise ne sert plus à apprendre dans ce projet.</aside>
+</section>
+
+<section class="slide" data-fam="f2b" data-titre="F2b · Conditions et dérives">
+  <p class="surtitre">Famille 2b · 4/6</p>
+  <h2>Un même projet, deux scénarios</h2>
+  <div class="grille g2">
+    <div class="carte"><h3>Scénario A · La fabrication d'abord</h3><p>L'enseignante fournit le modèle, les textes à recopier et les images. Les élèves montent une belle exposition. On évalue l'esthétique.</p><p class="petit"><b>Quelle décision intellectuelle leur reste-t-il?</b></p></div>
+    <div class="carte teinte"><h3>Scénario B · Les savoirs au service des choix</h3><p>Les élèves choisissent quoi documenter, justifient deux propositions avec des sources, reçoivent une rétroaction et révisent.</p><p class="petit"><b>Quels savoirs doivent-ils comprendre pour défendre leur proposition?</b></p></div>
+  </div>
+  <div class="grille g2" style="margin-top:.6rem">
+    <div class="carte"><h3>Conditions</h3><ul><li>Les savoirs sont nécessaires aux choix.</li><li>Les élèves décident réellement.</li><li>Jalons et rétroactions avant la remise.</li><li>Retour réflexif sur ce qui a changé.</li></ul></div>
+    <div class="carte"><h3>Dérives</h3><ul><li>Un produit sans savoir.</li><li>Bouger ou manipuler, sans penser.</li><li>Une classe inversée qui déplace l'exposé sans transformer l'activité.</li><li>La motivation prise pour une preuve d'apprentissage.</li></ul></div>
+  </div>
+  <details><summary>Pour vérifier : la classe a réalisé une très belle exposition. Ont-ils appris?</summary><p>On ne peut pas le dire avec l'exposition seule. Il faut voir si chaque élève peut expliquer une décision prise en utilisant une notion pertinente et une observation. Le produit est une trace possible, pas une preuve suffisante.</p></details>
+  <aside class="notes">Les deux scénarios décrivent le même projet. Ce qui change, c'est qui prend les décisions et à quoi servent les savoirs. Dans le scénario A, les élèves sont très occupés, mais la seule décision qui leur reste est esthétique. Gardez cette question pour toutes les familles : la motivation observée n'est pas une preuve d'apprentissage. Activité : à partir du scénario A, demandez aux équipes d'identifier la décision intellectuelle à redonner aux élèves et le moment où placer une rétroaction.</aside>
+</section>
+
+<section class="slide" data-fam="f2b" data-titre="F2b · Exemples">
+  <p class="surtitre">Famille 2b · 5/6</p>
+  <h2>Exemples dans les disciplines</h2>
+  <div class="grille g3">
+    <div class="carte"><span class="etiq">Français</span><p>Un balado de recommandations de lecture pour la bibliothèque : choisir, justifier, réviser après l'écoute d'un autre groupe.</p></div>
+    <div class="carte"><span class="etiq">Mathématique</span><p>Organiser un kiosque avec un budget : comparer des combinaisons, défendre une proposition devant le conseil d'élèves.</p></div>
+    <div class="carte"><span class="etiq">Science et technologie</span><p>Concevoir un prototype de mangeoire : tester, comparer à des critères, améliorer.</p></div>
+    <div class="carte"><span class="etiq">Arts plastiques</span><p>Une exposition où chaque œuvre est accompagnée d'une explication des choix techniques.</p></div>
+    <div class="carte"><span class="etiq">Classe inversée</span><p>Une courte capsule avant la classe, puis le temps accompagné sert à comparer deux sources et à construire une explication.</p></div>
+    <div class="carte teinte"><span class="etiq">Interdisciplinaire</span><p>Science et technologie, mathématique, français : un guide d'aménagements favorables à la biodiversité de la cour, justifié par des observations et révisé après rétroaction.</p></div>
+  </div>
+  <aside class="notes">Dans chaque exemple, repérez où se trouve la décision des élèves et le moment de révision. Sans eux, chaque exemple glisse vers la simple fabrication. L'exemple interdisciplinaire montre bien comment le projet peut intégrer plusieurs disciplines sans que l'une serve de décor aux autres.</aside>
+</section>
+
+<section class="slide" data-fam="f2b" data-titre="F2b · CUA, regards croisés, évaluation">
+  <p class="surtitre">Famille 2b · 6/6</p>
+  <h2>Accessibilité, regards croisés et évaluation</h2>
+  <div class="grille g3">
+    <div class="carte teinte"><h3>CUA</h3><ul>
+      <li>Ressources en texte et en audio, lexique des notions.</li>
+      <li>Jalons visibles, gabarit de journal de bord, outils de suivi.</li>
+      <li>Justification orale, écrite ou schématisée, avec les mêmes exigences.</li></ul></div>
+    <div class="carte teinte"><h3>Regards croisés</h3><ul>
+      <li><b>Convergences :</b> la pédagogie du projet revisitée (Papp, 2020), la pédagogie par la nature (Boelen et Nicolas, 2024), le journal de bord comme outil holistique (Larivière, 2013).</li>
+      <li><b>Vigilance :</b> des sources situées et autorisées, des communautés nommées ; jamais une culture réduite à un décor ou à un déguisement.</li></ul></div>
+    <div class="carte teinte"><h3>Évaluer</h3><ul>
+      <li>Produit collectif : une trace possible, pas suffisante.</li>
+      <li>Journal de projet : choix, essais, rétroactions, révisions.</li>
+      <li>Justification individuelle : observation, savoir, décision.</li>
+      <li>Observation de l'enseignante pendant la tâche.</li></ul></div>
+  </div>
+  <aside class="notes">Le journal de bord est un bel exemple de pont entre la CUA, les perspectives autochtones et l'évaluation : il soutient la planification, il valorise une réflexion holistique sur l'expérience et il rend visibles les choix. La vigilance culturelle est essentielle dans les projets : un projet qui mobilise des savoirs autochtones doit le faire avec des sources situées, jamais comme décor.</aside>
+</section>
+
+<!-- ================= FAMILLE 3 ================= -->
+<section class="slide intercalaire" data-fam="f3" data-titre="Famille 3 · Approches sociales et coopératives">
+  <div class="titre-page">
+    <h1>Approches sociales et coopératives</h1>
+    <p class="sous-fam">Famille 3</p>
+    <p class="approches">Apprentissage coopératif, débat structuré, dialogue, enquête de groupe</p>
+  </div>
+  <aside class="notes">Cette famille réunit les approches où l'interaction entre élèves est le moteur de l'apprentissage. Annoncez la distinction qui sera au cœur de la famille : travailler en équipe n'est pas la même chose qu'apprendre en coopérant.</aside>
+</section>
+
+<section class="slide" data-fam="f3" data-titre="F3 · Juxtaposer, coopérer, collaborer">
+  <p class="surtitre">Famille 3 · Approches sociales et coopératives · 1/7</p>
+  <h2>Juxtaposer, coopérer, collaborer</h2>
+  <p class="grand">L'interaction entre élèves est le moteur de l'apprentissage, pas seulement une façon d'organiser la classe.</p>
+  <div class="alerte"><b>Un outil partagé ne rend pas le travail collaboratif.</b> Quand chaque membre d'une équipe rédige « sa » section dans un document en ligne, l'outil est collaboratif, mais la pratique est une juxtaposition : on assemble des parties que personne n'a lues en entier.</div>
+  <div class="defile"><table>
+    <thead><tr><th scope="col"></th><th scope="col">Juxtaposer</th><th scope="col" class="f3">Coopérer</th><th scope="col">Collaborer</th></tr></thead>
+    <tbody>
+      <tr><th scope="row">Ce qui se passe</th><td>Chacun fait sa partie, puis on assemble.</td><td>Des parties complémentaires, toutes nécessaires pour réussir ; la mise en commun est indispensable.</td><td>On pense ensemble la même tâche, du début à la fin.</td></tr>
+      <tr><th scope="row">Exemple</th><td>Chacun rédige sa section du document partagé.</td><td>Casse-tête d'expertise : chacun devient expert d'une partie, puis l'équipe doit relier les parties pour répondre.</td><td>Rédiger à plusieurs une seule explication, en débattant chaque phrase.</td></tr>
+      <tr><th scope="row">Question test</th><td>Qui a lu la partie des autres?</td><td>Que manquerait-il sans cet élève? Peut-il expliquer la partie d'un autre?</td><td>Peut-on encore dire qui a écrit quoi?</td></tr>
+    </tbody>
+  </table></div>
+  <p class="petit">Vocabulaire : dans la tradition de l'apprentissage coopératif retenue dans le cours (Johnson et Johnson ; Howden et Kopiec), coopérer suppose interdépendance positive et responsabilité individuelle. Certains auteurs (Dillenbourg, 1999 ; Roschelle et Teasley, 1995) appellent plutôt «&nbsp;coopération&nbsp;» la simple division du travail, et réservent «&nbsp;collaboration&nbsp;» à l'engagement mutuel. Vérifiez le sens du mot dans chaque lecture.</p>
+  <aside class="notes">C'est la distinction la plus importante de la famille. Partez de l'exemple du document partagé : il est familier aux personnes étudiantes, qui le vivent souvent dans leurs travaux d'équipe. Lisez ensuite le tableau colonne par colonne, en insistant sur la ligne des questions test, qui permet de situer n'importe quel travail d'équipe. Signalez la nuance de vocabulaire : selon les auteurs, « coopération » désigne tantôt une simple division du travail, tantôt une coopération structurée ; dans le cours, nous retenons le second sens. Activité réflexive : demandez à chaque personne de situer un travail d'équipe récent du cours sur le continuum, puis de nommer ce qui l'aurait fait monter d'un niveau.</aside>
+</section>
+
+<section class="slide" data-fam="f3" data-titre="F3 · Les courants et le triangle">
+  <p class="surtitre">Famille 3 · 2/7</p>
+  <h2>Sur quoi repose la famille?</h2>
+  <div class="grille g3">
+    <div class="carte teinte"><h3>Vygotski</h3><p>Zone proximale de développement : avec l'aide d'un pair, l'élève réussit ce qu'il ne réussit pas encore seul. Le langage est un outil de pensée.</p></div>
+    <div class="carte teinte"><h3>Doise et Mugny</h3><p>Conflit sociocognitif : confronter des points de vue différents oblige à réorganiser sa pensée. Sans désaccord à résoudre, l'interaction produit peu d'apprentissage.</p></div>
+    <div class="carte teinte"><h3>Johnson et Johnson</h3><p>Interdépendance positive et responsabilité individuelle au cœur de l'apprentissage coopératif. Structures : casse-tête d'expertise (Aronson), enquête de groupe (Sharan et Sharan).</p></div>
+  </div>
+  <div class="tri" style="margin-top:.8rem">
+    <svg data-tri="f3" viewBox="-30 0 260 175" role="img" aria-label="Triangle de Houssaye : la relation apprendre, entre élèves et savoir, est souvent mise en avant"></svg>
+    <p><b>Houssaye : « social » ne veut pas dire « former ».</b> Quand le groupe compare des arguments ou construit une explication, c'est souvent la relation <i>apprendre</i> (élèves et savoir) qui domine. Quand l'enseignante organise les échanges, <i>former</i> passe au premier plan. Le risque propre à la famille : le <b>savoir</b> fait le mort, les élèves interagissent sans travailler le contenu.</p>
+  </div>
+  <aside class="notes">Trois apports théoriques à relier au tableau précédent. Vygotski explique pourquoi l'aide d'un pair peut faire progresser. Doise et Mugny expliquent pourquoi la juxtaposition apprend peu : sans confrontation, il n'y a pas de réorganisation de la pensée. Johnson et Johnson donnent les conditions qui distinguent la coopération de la juxtaposition. Pour le triangle, insistez sur le piège : on associe spontanément le travail d'équipe à la relation former, alors que, lorsque les élèves confrontent leurs idées sur un contenu, c'est la relation entre les élèves et le savoir qui est au premier plan. Question au groupe : « Racontez un travail d'équipe vécu où vous avez appris grâce aux autres, et un autre où ce n'était pas le cas. Qu'est-ce qui changeait? »</aside>
+</section>
+
+<section class="slide" data-fam="f3" data-titre="F3 · Quand y faire appel">
+  <p class="surtitre">Famille 3 · 3/7</p>
+  <h2>Quand y faire appel?</h2>
+  <div class="grille g2">
+    <div class="carte"><h3>Pertinente quand l'intention demande de…</h3><ul>
+      <li>confronter des points de vue ou argumenter ;</li>
+      <li>intégrer des sources ou des expertises complémentaires ;</li>
+      <li>expliquer à d'autres pour consolider sa compréhension ;</li>
+      <li>construire une compréhension ou une décision commune.</li></ul></div>
+    <div class="carte"><h3>Moins pertinente, ou à préparer, quand…</h3><ul>
+      <li>chacun pourrait produire le même raisonnement seul ;</li>
+      <li>les habiletés d'écoute et de désaccord ne sont pas encore enseignées : on peut les enseigner explicitement d'abord (famille 1).</li></ul></div>
+  </div>
+  <h3 style="margin-top:.8rem">Trois tests avant de retenir une démarche sociale</h3>
+  <div class="grille g3">
+    <div class="carte teinte"><h3>Nécessité</h3><p>Les élèves ont-ils besoin les uns des autres pour réussir?</p></div>
+    <div class="carte teinte"><h3>Contribution</h3><p>Chacun explique, questionne, décide ou vérifie, au lieu de colorier ou de tenir la feuille?</p></div>
+    <div class="carte teinte"><h3>Transfert individuel</h3><p>Comment saurai-je que chacun a compris, au-delà de la production commune?</p></div>
+  </div>
+  <aside class="notes">Les trois tests sont des questions à se poser à la planification comme à l'analyse. Le premier est le plus discriminant : si la tâche peut être réalisée identiquement seul, l'interdépendance est trop faible. Le troisième rappelle qu'une belle production commune ne dit rien de ce que chacun a compris.</aside>
+</section>
+
+<section class="slide" data-fam="f3" data-titre="F3 · Comment la mettre en œuvre">
+  <p class="surtitre">Famille 3 · 4/7</p>
+  <h2>Comment la mettre en œuvre?</h2>
+  <div class="chaine">
+    <div class="etape"><span class="num">1</span><h3>Préparer</h3><p>Rendre la tâche commune nécessaire : ressources complémentaires, groupes formés, obstacles de participation anticipés.</p><p><i>« Pourquoi avons-nous besoin des autres? »</i></p></div>
+    <div class="etape"><span class="num">2</span><h3>Outiller</h3><p>Enseigner la reformulation et le désaccord appuyé sur une preuve ; présenter des rôles productifs.</p><p><i>« Comment saurai-je que tu m'as compris? »</i></p></div>
+    <div class="etape"><span class="num">3</span><h3>Coopérer et réguler</h3><p>Observer qui contribue et comment les idées changent ; relancer sans décider à la place du groupe.</p><p><i>« Quelle idée d'un pair a fait évoluer votre proposition? »</i></p></div>
+    <div class="etape"><span class="num">4</span><h3>Objectiver</h3><p>Une réponse individuelle justifiée et un retour sur le fonctionnement du groupe.</p></div>
+  </div>
+  <h3>Des rôles utiles plutôt que décoratifs</h3>
+  <div class="grille g3">
+    <div class="carte"><b>Personne de synthèse :</b> « Comment notre idée A se relie-t-elle à l'idée B? »</div>
+    <div class="carte"><b>Responsable des preuves :</b> « Sur quoi appuie-t-on cette affirmation? »</div>
+    <div class="carte"><b>Régulatrice :</b> « Quelle idée n'a-t-on pas encore entendue? »</div>
+  </div>
+  <aside class="notes">Quatre moments. Le deuxième est souvent oublié : on attend des élèves qu'ils sachent coopérer sans le leur avoir enseigné. Les rôles en bas sont des rôles cognitifs. Un secrétaire, un décorateur ou un gardien du temps peuvent aider l'organisation, mais ils ne créent pas de coopération intellectuelle. Les rôles peuvent tourner.</aside>
+</section>
+
+<section class="slide" data-fam="f3" data-titre="F3 · Conditions et dérives">
+  <p class="surtitre">Famille 3 · 5/7</p>
+  <h2>Conditions d'efficacité et dérives à surveiller</h2>
+  <div class="grille g2">
+    <div class="carte"><h3>Six conditions</h3><ol>
+      <li><b>Interdépendance positive</b> : des apports complémentaires nécessaires.</li>
+      <li><b>Responsabilité individuelle</b> : on voit ce que chacun comprend.</li>
+      <li><b>Interactions intellectuelles</b> : expliquer, questionner, comparer.</li>
+      <li><b>Habiletés sociales enseignées</b>.</li>
+      <li><b>Participation équitable</b> : rôles tournants, temps de préparation.</li>
+      <li><b>Objectivation</b> du contenu et du fonctionnement du groupe.</li></ol></div>
+    <div class="carte"><h3>Dérives</h3><ul>
+      <li>Chacun fait « sa partie », puis on colle les morceaux.</li>
+      <li>Un ou deux élèves font tout, les autres décorent.</li>
+      <li>Une seule note collective, rien d'individuel.</li>
+      <li>Un porte-parole monopolise la parole.</li>
+      <li>Un vote majoritaire présenté comme « la bonne réponse ».</li>
+      <li>Une question binaire qui oblige à choisir un camp au lieu d'examiner.</li></ul></div>
+  </div>
+  <details><summary>Pour vérifier : l'enseignante dit que ses équipes font de l'« apprentissage coopératif ». Comment le vérifier?</summary><p>On ne se fie pas à l'étiquette. On cherche dans ce qui est prévu les cinq éléments de Johnson et Johnson, surtout l'interdépendance positive et la responsabilité individuelle. Sans eux, c'est un travail en équipe, utile parfois, mais qui ne garantit pas que chacun apprenne.</p></details>
+  <aside class="notes">Les six conditions sont à connaître, mais deux sont décisives : l'interdépendance positive et la responsabilité individuelle. Les dérives à droite se repèrent facilement dans une description de classe. La dernière mérite une discussion : un débat pour ou contre peut être utile pour argumenter, mais il peut aussi hiérarchiser des points de vue au lieu de les examiner. Activité : remettez la description d'un travail d'équipe et demandez de repérer, parmi les six conditions, celles qui manquent, puis de proposer un rôle cognitif qui en rétablirait une.</aside>
+</section>
+
+<section class="slide" data-fam="f3" data-titre="F3 · Exemples">
+  <p class="surtitre">Famille 3 · 6/7</p>
+  <h2>Exemples dans les disciplines</h2>
+  <div class="grille g3">
+    <div class="carte"><span class="etiq">Univers social</span><p>Casse-tête d'expertise : une photo ancienne, un graphique de population, un plan récent. Les experts relient leurs sources pour expliquer comment un quartier a changé.</p></div>
+    <div class="carte"><span class="etiq">Culture et citoyenneté québécoise</span><p>Discussion structurée sur un aménagement devant l'école : arguments appuyés sur des données, reformulation de l'argument d'un autre, position révisée.</p></div>
+    <div class="carte"><span class="etiq">Français</span><p>Cercle de lecture avec rôles tournants (questionneur, chercheur d'indices, synthèse), puis interprétation individuelle.</p></div>
+    <div class="carte"><span class="etiq">Mathématique</span><p>Pense, parle, partage : comparer deux stratégies de calcul et expliquer pourquoi l'une est plus efficace.</p></div>
+    <div class="carte"><span class="etiq">Science et technologie</span><p>Enquête de groupe : chaque sous-groupe étudie un facteur, puis l'équipe doit articuler les résultats pour expliquer.</p></div>
+    <div class="carte teinte"><span class="etiq">Interdisciplinaire</span><p>Science, mathématique, vie collective : proposer un aménagement de cour plus frais qui concilie ombre, usages et coûts, en négociant un compromis.</p></div>
+  </div>
+  <aside class="notes">Dans chaque exemple, cherchez ce qui oblige les élèves à apprendre les uns des autres. Dans le casse-tête d'expertise, c'est la synthèse qui exige de relier les sources ; si chacun récite sa pièce, l'interdépendance est perdue. Dans l'exemple interdisciplinaire, le conflit entre contraintes est justement ce qui rend la négociation formatrice.</aside>
+</section>
+
+<section class="slide" data-fam="f3" data-titre="F3 · CUA, regards croisés, évaluation">
+  <p class="surtitre">Famille 3 · 7/7</p>
+  <h2>Accessibilité, regards croisés et évaluation</h2>
+  <div class="grille g3">
+    <div class="carte teinte"><h3>CUA</h3><ul>
+      <li>Avant : documents en audio, visuel ou texte adapté, temps de préparation individuel.</li>
+      <li>Pendant : amorces affichées, rôles tournants, appui écrit ou visuel.</li>
+      <li>Après : plusieurs modes pour montrer sa compréhension, avec la même exigence.</li></ul>
+      <p class="petit">Parler autant ne veut pas dire apprendre autant.</p></div>
+    <div class="carte teinte"><h3>Regards croisés</h3><ul>
+      <li><b>Convergences :</b> cercles de savoirs (Graveline, 1998), apprentissage intergénérationnel (Tagalik et coll., 2019), question essentielle en mode circulaire (McTighe et Wiggins, 2013).</li>
+      <li><b>Tension :</b> le conflit sociocognitif et le débat contradictoire, contre l'écoute et la recherche d'harmonie du cercle.</li>
+      <li><b>Vigilance :</b> ne jamais demander à un élève de parler au nom de sa communauté.</li></ul></div>
+    <div class="carte teinte"><h3>Évaluer</h3><ul>
+      <li>Grille d'observation : qualité des échanges, pas seulement le nombre de prises de parole.</li>
+      <li>Production collective : le résultat du groupe.</li>
+      <li>Billet individuel justifié : ce que chacun a compris, en mobilisant l'apport d'un pair.</li></ul></div>
+  </div>
+  <aside class="notes">La famille 3 entre en dialogue étroit avec les perspectives autochtones, qui conçoivent l'apprentissage comme relationnel. Mais la tension est réelle : le débat contradictoire n'est pas le cercle. Un cercle porte des valeurs de respect et d'égalité de parole ; l'emprunter suppose humilité culturelle. Pour l'évaluation, retenez qu'il faut toujours un regard sur l'individu, en plus du collectif.</aside>
+</section>
+
+<!-- ================= SYNTHÈSE ================= -->
+<section class="slide" data-fam="syn" data-titre="Combiner les familles">
+  <p class="surtitre">Synthèse · 1/4</p>
+  <h2>Combiner les familles dans une séquence interdisciplinaire</h2>
+  <p class="lead">« Moins de gaspillage à la cafétéria » · Science et technologie, mathématique, français, culture et citoyenneté québécoise, 3e cycle</p>
+  <div class="timeline">
+    <div class="t" style="background:var(--f1p);border-top:5px solid var(--f1)"><b style="color:var(--f1)">Famille 1</b>Mini-leçon explicite : construire et lire un diagramme à bandes, avec le pourquoi de chaque choix (échelle, titre).</div>
+    <div class="t" style="background:var(--f2ap);border-top:5px solid var(--f2a)"><b style="color:var(--f2a)">Famille 2a</b>Enquête : qu'est-ce qu'on jette le plus, et pourquoi? Collecte de données pendant une semaine, hypothèses, interprétation.</div>
+    <div class="t" style="background:var(--f3p);border-top:5px solid var(--f3)"><b style="color:var(--f3)">Famille 3</b>Casse-tête d'expertise sur les points de vue (élèves, personnel, familles), puis discussion structurée sur les mesures à proposer.</div>
+    <div class="t" style="background:var(--f2bp);border-top:5px solid var(--f2b)"><b style="color:var(--f2b)">Famille 2b</b>Projet : un plan d'action présenté au conseil d'établissement, révisé après rétroaction.</div>
+  </div>
+  <div class="grille g3" style="margin-top:.8rem">
+    <div class="carte"><h3>Ce qui fait la cohérence</h3><p>Chaque famille sert un apprentissage précis, au moment où il est nécessaire.</p></div>
+    <div class="carte"><h3>CUA</h3><p>Données recueillies en dessins, photos ou chiffres ; plan présenté à l'oral, en affiche ou en vidéo, avec les mêmes critères.</p></div>
+    <div class="carte"><h3>Regards croisés</h3><p>L'apprentissage par engagement responsable : on apprend parce qu'on est responsable de quelque chose de réel.</p></div>
+  </div>
+  <aside class="notes">Voici comment les quatre familles peuvent se succéder dans une même séquence. Chacune arrive au moment où elle est la plus utile : on enseigne explicitement l'outil, on enquête, on confronte les points de vue, on agit. Remarquez le lien avec l'apprentissage par engagement responsable : le savoir prend son sens dans une responsabilité réelle envers la communauté.</aside>
+</section>
+
+<section class="slide" data-fam="syn" data-titre="Cinq confusions à éviter">
+  <p class="surtitre">Synthèse · 2/4</p>
+  <h2>Cinq confusions qui traversent toutes les familles</h2>
+  <div class="grille g2">
+    <div class="carte"><h3>L'étiquette n'est pas la pratique</h3><p>« Enquête », « coopératif », « projet » : on vérifie ce qui se passe réellement, pas le nom donné par l'enseignante.</p></div>
+    <div class="carte"><h3>Être actif n'est pas apprendre</h3><p>Manipuler, bouger, découper, discuter : à quoi pensent les élèves? que décident-ils?</p></div>
+    <div class="carte"><h3>Le produit n'est pas la preuve</h3><p>Une belle affiche, une bonne moyenne, un vote unanime : que permettent-ils réellement de conclure pour chaque élève?</p></div>
+    <div class="carte"><h3>La motivation n'est pas l'apprentissage</h3><p>« Les élèves étaient très motivés » est un indice d'engagement, pas une trace de compréhension.</p></div>
+    <div class="carte"><h3>L'autonomie n'est pas l'abandon</h3><p>Plus la tâche est ouverte, plus le cadre doit être lisible : critères, jalons, relances.</p></div>
+    <div class="carte teinte"><h3>La question qui les règle toutes</h3><p class="grand" style="font-size:1.1rem">Un élève peut-il réussir cette tâche, ou obtenir ces points, sans avoir appris ce qui est visé?</p></div>
+  </div>
+  <aside class="notes">Ces cinq confusions reviennent dans toutes les familles. Elles sont au cœur de l'analyse de pratiques. La question de la dernière carte est votre meilleur outil : appliquez-la à chaque tâche et à chaque outil d'évaluation que vous rencontrerez, en stage comme en classe.</aside>
+</section>
+
+<section class="slide" data-fam="syn" data-titre="S'exercer">
+  <p class="surtitre">Synthèse · 3/4</p>
+  <h2>À vous : quelle famille, et qu'est-ce qui cloche?</h2>
+  <div class="grille g2">
+    <div class="carte">
+      <p><b>1.</b> En 2e année, l'enseignante écrit au tableau « Les objets lourds coulent », puis fait vérifier avec quatre objets. Un élève remarque qu'une grosse pomme flotte ; elle répond qu'on verra ça plus tard.</p>
+      <div class="choix" data-groupe="q1">
+        <button type="button" data-ok="1" data-fb="Oui. C'est présenté comme une expérience, mais la conclusion est donnée avant. Et la remarque de l'élève était justement l'obstacle qui aurait pu lancer une vraie enquête (famille 2a).">Une fausse enquête</button>
+        <button type="button" data-fb="Pas tout à fait. Il n'y a ni modelage ni pratique guidée : la conclusion est simplement affirmée, puis vérifiée. Regardez plutôt le moment où l'élève observe la pomme.">Un enseignement explicite réussi</button>
+      </div><div class="fb" aria-live="polite"></div>
+    </div>
+    <div class="carte">
+      <p><b>2.</b> Quatre élèves lisent chacun un chapitre différent, en discutent en groupes d'experts, puis retournent dans leur équipe. L'équipe remet une affiche commune, notée collectivement.</p>
+      <div class="choix" data-groupe="q2">
+        <button type="button" data-fb="En partie seulement. L'interdépendance est réelle (chacun détient une partie), mais rien ne permet de voir ce que chacun a compris.">Un apprentissage coopératif complet</button>
+        <button type="button" data-ok="1" data-fb="Exact. Le casse-tête d'expertise crée l'interdépendance, mais la note uniquement collective efface la responsabilité individuelle. Une trace individuelle rétablirait l'équilibre (famille 3).">Une coopération sans responsabilité individuelle</button>
+      </div><div class="fb" aria-live="polite"></div>
+    </div>
+    <div class="carte">
+      <p><b>3.</b> Les élèves regardent une capsule à la maison. En classe, l'enseignante reprend tout le contenu en exposé de 25 minutes, puis distribue un texte à trous.</p>
+      <div class="choix" data-groupe="q3">
+        <button type="button" data-ok="1" data-fb="Oui. L'organisation est inversée, mais le temps en classe ne sert pas à un travail intellectuel accompagné. Rien n'a été transformé (famille 2b).">Une classe inversée qui ne transforme rien</button>
+        <button type="button" data-fb="Le format est bien celui de la classe inversée, mais regardez ce que font les élèves en classe : écouter, puis compléter des trous.">Une classe inversée réussie</button>
+      </div><div class="fb" aria-live="polite"></div>
+    </div>
+    <div class="carte">
+      <p><b>4.</b> En modelage, l'enseignant pense à voix haute : « Je ne comprends pas ce mot. Je cherche des indices autour, puis je vérifie si mon hypothèse tient. »</p>
+      <div class="choix" data-groupe="q4">
+        <button type="button" data-fb="Non. Il ne montre pas une suite d'étapes fixes : il montre quand on décide d'utiliser un moyen et comment on vérifie qu'il a fonctionné.">Une procédure</button>
+        <button type="button" data-ok="1" data-fb="Exact. Il rend visibles le moment du blocage, le choix de la stratégie et la vérification de son efficacité. C'est un modelage de stratégie (famille 1).">Une stratégie cognitive</button>
+      </div><div class="fb" aria-live="polite"></div>
+    </div>
+  </div>
+  <aside class="notes">Quatre courtes situations pour vérifier la compréhension. Laissez d'abord le groupe discuter en dyades, puis cliquez. Pour chaque situation, demandez aussi : qu'est-ce que vous changeriez en priorité? C'est le geste professionnel au cœur de l'analyse de pratiques.</aside>
+</section>
+
+<section class="slide" data-fam="syn" data-titre="Six questions et références">
+  <p class="surtitre">Synthèse · 4/4</p>
+  <h2>Six questions pour analyser n'importe quelle pratique</h2>
+  <div class="grille g3">
+    <div class="carte teinte"><b>1. Quelle famille?</b> Quels indices précis, au-delà de l'étiquette?</div>
+    <div class="carte teinte"><b>2. Quels fondements?</b> Quel courant, quelle relation du triangle à ce moment?</div>
+    <div class="carte teinte"><b>3. Est-ce pertinent?</b> Forces, limites, conditions, au regard de l'intention.</div>
+    <div class="carte teinte"><b>4. Est-ce aligné?</b> Que mesure réellement chaque outil d'évaluation?</div>
+    <div class="carte teinte"><b>5. Est-ce accessible?</b> Quelle barrière lever, sans abaisser l'exigence?</div>
+    <div class="carte teinte"><b>6. Regards croisés?</b> Convergences, tensions, posture de respect.</div>
+  </div>
+  <details><summary>Références</summary>
+    <ul class="petit">
+      <li>Aronson, E. et coll. (1978). <i>The jigsaw classroom</i>. Sage.</li>
+      <li>Aurousseau, E. (2024). <i>Mobilisation de perspectives autochtones dans les programmes scolaires</i>. UQAC.</li>
+      <li>Blumenfeld, P. C. et coll. (1991). Motivating project-based learning. <i>Educational Psychologist, 26</i>(3-4), 369-398.</li>
+      <li>Bousquet, M.-P. et Karl, S. H. (dir.) (2019). <i>La blessure qui dormait à poings fermés</i>. Recherches amérindiennes au Québec.</li>
+      <li>Campeau, D. M. (2021). Pédagogie autochtone et pédagogie du lieu. <i>Éducation et francophonie, 49</i>(1), 52-70.</li>
+      <li>CAST (2018). <i>Universal Design for Learning Guidelines version 2.2</i>.</li>
+      <li>Dewey, J. (1938). <i>Experience and education</i>. Macmillan.</li>
+      <li>Gauthier, C., Bissonnette, S. et Richard, M. (2013). <i>Enseignement explicite et réussite des élèves</i>. ERPI.</li>
+      <li>Graveline, F. J. (1998). <i>Circle works</i>. Fernwood.</li>
+      <li>Hmelo-Silver, C. E., Duncan, R. G. et Chinn, C. A. (2007). <i>Educational Psychologist, 42</i>(2), 99-107.</li>
+      <li>Houssaye, J. (2014). <i>Le triangle pédagogique</i>. ESF.</li>
+      <li>Howden, J. et Kopiec, M. (2002). <i>Cultiver la collaboration</i>. Chenelière.</li>
+      <li>Johnson, D. W. et Johnson, R. T. (2009). <i>Educational Researcher, 38</i>(5), 365-379.</li>
+      <li>Joyce, B., Weil, M. et Calhoun, E. (2014). <i>Models of teaching</i> (9e éd.). Pearson.</li>
+      <li>Kalyuga, S. et coll. (2003). The expertise reversal effect. <i>Educational Psychologist, 38</i>(1), 23-31.</li>
+      <li>Kirschner, P. A., Sweller, J. et Clark, R. E. (2006). <i>Educational Psychologist, 41</i>(2), 75-86.</li>
+      <li>McTighe, J. et Wiggins, G. (2013). <i>Essential questions</i>. ASCD.</li>
+      <li>Papp, T. A. (2020). <i>Diaspora, Indigenous, and Minority Education, 14</i>(1), 25-42.</li>
+      <li>Pearson, P. D. et Gallagher, M. C. (1983). <i>Contemporary Educational Psychology, 8</i>(3), 317-344.</li>
+      <li>Sharan, S. et Sharan, Y. (1992). <i>Expanding cooperative learning through group investigation</i>. Teachers College Press.</li>
+      <li>Tagalik, S. et coll. (2019). <i>Revue de la persévérance et de la réussite scolaires chez les Premiers Peuples, 3</i>, 102-105.</li>
+      <li>Tardif, J. (1992). <i>Pour un enseignement stratégique</i>. Logiques.</li>
+      <li>Wood, D., Bruner, J. S. et Ross, G. (1976). <i>Journal of Child Psychology and Psychiatry, 17</i>(2), 89-100.</li>
+    </ul>
+  </details>
+  <aside class="notes">Pour terminer, les six questions qui reprennent les dimensions de notre grille d'analyse. Elles fonctionnent pour toutes les familles et toutes les disciplines. Les guides interactifs de chaque famille peuvent prolonger le travail en autonomie, avec des cas d'entraînement corrigés.</aside>
+</section>
+
+</main>
+
+<aside id="panneau-notes" hidden aria-label="Notes de l'animatrice"><h2>Notes de l'animatrice</h2><div id="texte-notes"></div></aside>
+
+<div id="plan" hidden role="dialog" aria-label="Plan de la présentation"><div class="cols" id="plan-cols"></div></div>
+
+<nav class="nav" aria-label="Navigation entre les diapositives">
+  <button type="button" id="prec">← Précédente</button>
+  <span id="compteur" aria-live="polite"></span>
+  <button type="button" id="suiv">Suivante →</button>
+</nav>
+
+<script>
+(function(){
+"use strict";
+var slides=Array.prototype.slice.call(document.querySelectorAll(".slide"));
+var i=0, base=18;
+var NOMS={intro:"Introduction",f1:"Famille 1 · Structurées et directes",f2a:"Famille 2a · Problème et enquête",f2b:"Famille 2b · Projet et pédagogies actives",f3:"Famille 3 · Sociales et coopératives",syn:"Synthèse"};
+var COUL={intro:"#2F4F40",f1:"#2C5E7A",f2a:"#7A5420",f2b:"#5E4385",f3:"#8A3A4C",syn:"#2F4F40"};
+var fil=document.getElementById("fil"),compteur=document.getElementById("compteur"),progres=document.getElementById("progres");
+var notes=document.getElementById("panneau-notes"),texteNotes=document.getElementById("texte-notes");
+var plan=document.getElementById("plan");
+
+function afficher(n){
+  i=Math.max(0,Math.min(slides.length-1,n));
+  slides.forEach(function(s,k){s.classList.toggle("active",k===i);});
+  var fam=slides[i].getAttribute("data-fam");
+  fil.textContent=NOMS[fam];fil.style.background=COUL[fam];progres.style.background=COUL[fam];
+  compteur.textContent=(i+1)+" / "+slides.length;
+  progres.style.width=((i+1)/slides.length*100)+"%";
+  document.getElementById("prec").disabled=(i===0);
+  document.getElementById("suiv").disabled=(i===slides.length-1);
+  var n2=slides[i].querySelector(".notes");texteNotes.textContent=n2?n2.textContent:"";
+  try{if(location.hash!=="#d"+(i+1))history.replaceState(null,"","#d"+(i+1));}catch(e){}
+  window.scrollTo(0,0);
+}
+document.getElementById("prec").addEventListener("click",function(){afficher(i-1);});
+document.getElementById("suiv").addEventListener("click",function(){afficher(i+1);});
+
+function basculerNotes(){notes.hidden=!notes.hidden;document.getElementById("b-notes").setAttribute("aria-pressed",String(!notes.hidden));}
+function basculerPlan(){plan.hidden=!plan.hidden;document.getElementById("b-plan").setAttribute("aria-pressed",String(!plan.hidden));if(!plan.hidden){var b=plan.querySelector("button");if(b)b.focus();}}
+document.getElementById("b-notes").addEventListener("click",basculerNotes);
+document.getElementById("b-plan").addEventListener("click",basculerPlan);
+document.getElementById("b-plus").addEventListener("click",function(){base=Math.min(26,base+2);document.documentElement.style.setProperty("--taille",base+"px");});
+document.getElementById("b-moins").addEventListener("click",function(){base=Math.max(14,base-2);document.documentElement.style.setProperty("--taille",base+"px");});
+document.getElementById("b-imprimer").addEventListener("click",function(){window.print();});
+
+document.addEventListener("keydown",function(e){
+  var t=e.target.tagName;if(t==="INPUT"||t==="TEXTAREA")return;
+  if(e.key==="ArrowRight"||e.key==="PageDown"||(e.key===" "&&t!=="BUTTON"&&t!=="SUMMARY")){e.preventDefault();afficher(i+1);}
+  else if(e.key==="ArrowLeft"||e.key==="PageUp"){e.preventDefault();afficher(i-1);}
+  else if(e.key==="Home"){afficher(0);}else if(e.key==="End"){afficher(slides.length-1);}
+  else if(e.key==="n"||e.key==="N"){basculerNotes();}
+  else if(e.key==="p"||e.key==="P"){basculerPlan();}
+  else if(e.key==="Escape"){if(!plan.hidden)basculerPlan();else if(!notes.hidden)basculerNotes();}
+});
+
+/* plan */
+var cols=document.getElementById("plan-cols"),groupes={};
+slides.forEach(function(s,k){
+  var f=s.getAttribute("data-fam");
+  if(!groupes[f]){var d=document.createElement("div");d.innerHTML="<h2 style='color:"+COUL[f]+"'>"+NOMS[f]+"</h2><ol></ol>";cols.appendChild(d);groupes[f]=d.querySelector("ol");}
+  var li=document.createElement("li"),b=document.createElement("button");b.type="button";b.textContent=s.getAttribute("data-titre");
+  b.addEventListener("click",function(){basculerPlan();afficher(k);});li.appendChild(b);groupes[f].appendChild(li);
+});
+
+/* triangles de Houssaye */
+var AXES={f1:["enseigner","former","apprendre"],f2a:["apprendre"],f2b:["apprendre"],f3:["apprendre"]};
+document.querySelectorAll("svg[data-tri]").forEach(function(svg){
+  var f=svg.getAttribute("data-tri"),c=COUL[f],ax=AXES[f];
+  var S=[100,22],E=[28,145],L=[172,145];
+  function seg(a,b,on,lab,lx,ly){return "<line x1='"+a[0]+"' y1='"+a[1]+"' x2='"+b[0]+"' y2='"+b[1]+"' stroke='"+(on?c:"#B9C2BB")+"' stroke-width='"+(on?6:2)+"' stroke-dasharray='"+(on?"":"4 4")+"' stroke-linecap='round'/><text x='"+lx+"' y='"+ly+"' font-size='12' text-anchor='middle' fill='"+(on?c:"#7A867E")+"' font-weight='"+(on?700:400)+"'>"+lab+"</text>";}
+  function som(p,t){return "<circle cx='"+p[0]+"' cy='"+p[1]+"' r='14' fill='#fff' stroke='"+c+"' stroke-width='2'/><text x='"+p[0]+"' y='"+(p[1]+5)+"' font-size='13' font-weight='700' text-anchor='middle' fill='"+c+"'>"+t+"</text>";}
+  svg.innerHTML=seg(E,S,ax.indexOf("enseigner")>-1,"enseigner",42,78)+seg(E,L,ax.indexOf("former")>-1,"former",100,166)+seg(L,S,ax.indexOf("apprendre")>-1,"apprendre",160,78)+som(S,"S")+som(E,"E")+som(L,"É");
+});
+
+/* choix et rétroactions */
+document.querySelectorAll(".choix").forEach(function(g){
+  var fb=g.nextElementSibling;
+  g.querySelectorAll("button").forEach(function(b){
+    b.setAttribute("aria-pressed","false");
+    b.addEventListener("click",function(){
+      g.querySelectorAll("button").forEach(function(x){x.setAttribute("aria-pressed","false");});
+      b.setAttribute("aria-pressed","true");
+      var type=g.getAttribute("data-groupe")==="visee"?"info":(b.getAttribute("data-ok")?"ok":"nok");
+      var pref=type==="ok"?"✓ ":(type==="nok"?"À revoir. ":"");
+      fb.innerHTML="";var d=document.createElement("div");d.className="r "+type;d.textContent=pref+b.getAttribute("data-fb");fb.appendChild(d);
+    });
+  });
+});
+
+/* accès direct aux familles depuis la page titre */
+document.querySelectorAll("[data-aller]").forEach(function(b){
+  b.addEventListener("click",function(){
+    var fam=b.getAttribute("data-aller");
+    for(var k=0;k<slides.length;k++){if(slides[k].getAttribute("data-fam")===fam){afficher(k);break;}}
+  });
+});
+
+window.addEventListener("hashchange",function(){var h=/^#d(\d+)$/.exec(location.hash);if(h&&parseInt(h[1],10)-1!==i)afficher(parseInt(h[1],10)-1);});
+var m=/^#d(\d+)$/.exec(location.hash);afficher(m?parseInt(m[1],10)-1:0);
+})();
+</script>
+</body>
+</html>
